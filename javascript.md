@@ -195,19 +195,20 @@ of callbacks.
 **To avoid Callback Hell, modern JavaScript provides alternatives like Promises and async/await.** Here’s the same code
 using Promises:
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="30ff" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">const</span> <span class="hljs-title.function">readFile</span> = (<span class="hljs-params">file</span>) => {  
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title.class">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =></span> {  
-    fs.<span class="hljs-title.function">readFile</span>(file, <span class="hljs-string">'utf8'</span>, <span class="hljs-function">(<span class="hljs-params">err, data</span>) =></span> {  
-      <span class="hljs-keyword">if</span> (err) {  
-        <span class="hljs-title.function">reject</span>(err);  
-      } <span class="hljs-keyword">else</span> {  
-        <span class="hljs-title.function">resolve</span>(data);  
+  ```javascript
+  const readFile = (file) => {  
+  return new Promise((resolve, reject) => {  
+    fs.readFile(file, 'utf8', (err, data) => {  
+      if (err) {  
+        reject(err);  
+      } else {  
+        resolve(data);  
       }  
     });  
   });  
-};</span></pre>
+};
 
-<pre class="qd pv pr qe qf ax qg bj"><span id="d074" class="nf ng fr pr b hl qh qi l qj qc" data-selectable-paragraph="">readFile('file1.txt')  
+readFile('file1.txt')  
   .then((data1) => {  
     return readFile('file2.txt');  
   })  
@@ -219,7 +220,8 @@ using Promises:
   })  
   .catch((err) => {  
     console.error(err);  
-  });</span></pre>
+  });
+  ```
 
 ## **7\. What is Promise and Promise chaining?**
 
@@ -243,26 +245,28 @@ we can access the result of promise using .then() handler.
 
 we can catch the error in the .catch() handler.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="92bb" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-comment">// Creating a Promise</span>  
-<span class="hljs-keyword">const</span> fetchData = <span class="hljs-keyword">new</span> <span class="hljs-title.class">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =></span> {  
-  <span class="hljs-comment">// Simulate fetching data from a server</span>  
-  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =></span> {  
-    <span class="hljs-keyword">const</span> data = <span class="hljs-string">'Some data from the server'</span>;  
-    <span class="hljs-comment">// Resolve the Promise with the retrieved data</span>  
-    <span class="hljs-title.function">resolve</span>(data);  
-    <span class="hljs-comment">// Reject the Promise with an error</span>  
-    <span class="hljs-comment">// reject(new Error('Failed to fetch data'));</span>  
-  }, <span class="hljs-number">1000</span>);  
+```javascript
+// Creating a Promise  
+const fetchData = new Promise((resolve, reject) => {  
+  // Simulate fetching data from a server  
+  setTimeout(() => {  
+    const data = 'Some data from the server';  
+    // Resolve the Promise with the retrieved data  
+    resolve(data);  
+    // Reject the Promise with an error  
+    // reject(new Error('Failed to fetch data'));  
+  }, 1000);  
 });  
 
-<span class="hljs-comment">// Consuming the Promise</span>  
+// Consuming the Promise  
 fetchData  
-  .<span class="hljs-title.function">then</span>(<span class="hljs-function">(<span class="hljs-params">data</span>) =></span> {  
-    <span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(<span class="hljs-string">'Data fetched:'</span>, data);  
+  .then((data) => {  
+    console.log('Data fetched:', data);  
   })  
-  .<span class="hljs-title.function">catch</span>(<span class="hljs-function">(<span class="hljs-params">error</span>) =></span> {  
-    <span class="hljs-variable.language">console</span>.<span class="hljs-title.function">error</span>(<span class="hljs-string">'Error fetching data:'</span>, error);  
-  });</span></pre>
+  .catch((error) => {  
+    console.error('Error fetching data:', error);  
+  });
+```
 
 **Promise chaining:** The process of **executing a sequence of asynchronous tasks one after another using promises** is
 known as Promise chaining.
@@ -270,21 +274,23 @@ known as Promise chaining.
 **It involves chaining multiple** `**.then()**` **methods** to a Promise to perform a series of tasks in a specific
 order.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="3535" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">new</span> <span class="hljs-title.class">Promise</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">resolve, reject</span>) {  
-  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =></span> <span class="hljs-title.function">resolve</span>(<span class="hljs-number">1</span>), <span class="hljs-number">1000</span>);  
+```javascript
+new Promise(function (resolve, reject) {  
+  setTimeout(() => resolve(1), 1000);  
 })  
-  .<span class="hljs-title.function">then</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">result</span>) {  
-    <span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(result); <span class="hljs-comment">// 1</span>  
-    <span class="hljs-keyword">return</span> result * <span class="hljs-number">2</span>;  
+  .then(function (result) {  
+    console.log(result); // 1  
+    return result * 2;  
   })  
-  .<span class="hljs-title.function">then</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">result</span>) {  
-    <span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(result); <span class="hljs-comment">// 2</span>  
-    <span class="hljs-keyword">return</span> result * <span class="hljs-number">3</span>;  
+  .then(function (result) {  
+    console.log(result); // 2  
+    return result * 3;  
   })  
-  .<span class="hljs-title.function">then</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">result</span>) {  
-    <span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(result); <span class="hljs-comment">// 6</span>  
-    <span class="hljs-keyword">return</span> result * <span class="hljs-number">4</span>;  
-  });</span></pre>
+  .then(function (result) {  
+    console.log(result); // 6  
+    return result * 4;  
+  });
+```
 
 ## 8\. What is async/await ?
 
