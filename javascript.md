@@ -525,23 +525,28 @@ The rest operator, represented by three dots (`...`), is used in function parame
 arguments into an array**. It allows you to pass an arbitrary number of arguments to a function **without explicitly
 defining them as named parameters.**
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="433a" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">function</span> <span class="hljs-title.function">sum</span>(<span class="hljs-params">...numbers</span>) {  
-    <span class="hljs-keyword">return</span> numbers.<span class="hljs-title.function">reduce</span>(<span class="hljs-function">(<span class="hljs-params">total, num</span>) =></span> total + num, <span class="hljs-number">0</span>);  
-}  
-<span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(<span class="hljs-title.function">sum</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>)); <span class="hljs-comment">// Outputs 10</span></span></pre>
+```javascript
+function sum(...numbers) {  
+    return numbers.reduce((total, num) => total + num, 0);  
+}
+
+console.log(sum(1, 2, 3, 4)); // Outputs 10
+```
 
 **The spread operator**, also denoted by three dots (`...`), is **used to spread the elements of an array or object into
 another array or object**. It allows you to easily clone arrays, concatenate arrays, and merge objects.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="edf5" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">const</span> array1 = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];  
-<span class="hljs-keyword">const</span> array2 = [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>];  
-<span class="hljs-keyword">const</span> mergedArray = [...array1, ...array2];  
-<span class="hljs-comment">// mergedArray is [1, 2, 3, 4, 5, 6]</span></span></pre>
+```javascript
+const array1 = [1, 2, 3];  
+const array2 = [4, 5, 6];  
+const mergedArray = [...array1, ...array2];  
+// mergedArray is [1, 2, 3, 4, 5, 6]
 
-<pre class="qd pv pr qe qf ax qg bj"><span id="566a" class="nf ng fr pr b hl qh qi l qj qc" data-selectable-paragraph="">const obj1 = { a: 1, b: 2 };  
-const obj2 = { b: 3, c: 4 };  
-const mergedObject = { ...obj1, ...obj2 };  
-// mergedObject is { a: 1, b: 3, c: 4 }</span></pre>
+const obj1 = { a: 1, b: 2 };
+const obj2 = { b: 3, c: 4 };
+const mergedObject = { ...obj1, ...obj2 };
+// mergedObject is { a: 1, b: 3, c: 4 }
+```
 
 ## **12\. What is a higher-order function?**
 
@@ -549,21 +554,23 @@ Higher-order function in JavaScript is **a function that** **either takes one or
 a function as its result.** In other words, it operates on functions, either by taking them as arguments, returning
 them, or both.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="7206" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">function</span> <span class="hljs-title.function">operationOnArray</span>(<span class="hljs-params">arr, operation</span>) {  
-  <span class="hljs-keyword">let</span> result = [];  
-  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> element <span class="hljs-keyword">of</span> arr) {  
-    result.<span class="hljs-title.function">push</span>(<span class="hljs-title.function">operation</span>(element));  
+```javascript
+function operationOnArray(arr, operation) {  
+  let result = [];  
+  for (let element of arr) {  
+    result.push(operation(element));  
   }  
-  <span class="hljs-keyword">return</span> result;  
+  return result;  
 }  
 
-<span class="hljs-keyword">function</span> <span class="hljs-title.function">double</span>(<span class="hljs-params">x</span>) {  
-  <span class="hljs-keyword">return</span> x * <span class="hljs-number">2</span>;  
+function double(x) {  
+  return x * 2;  
 }  
 
-<span class="hljs-keyword">let</span> numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>];  
-<span class="hljs-keyword">let</span> doubledNumbers = <span class="hljs-title.function">operationOnArray</span>(numbers, double);  
-<span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(doubledNumbers); <span class="hljs-comment">// Output: [2, 4, 6, 8]</span></span></pre>
+let numbers = [1, 2, 3, 4];  
+let doubledNumbers = operationOnArray(numbers, double);  
+console.log(doubledNumbers); // Output: [2, 4, 6, 8]
+```
 
 They enable powerful techniques such as function composition, currying, and callback-based asynchronous operations.
 Understanding higher-order functions is essential for writing expressive and functional-style JavaScript code.
