@@ -2,13 +2,14 @@
 
 ## **1\. Is Javascript single-threaded?**
 
-Yes, **JavaScript is** a **single-threaded language**.  This means that it has **only one call stack and one memory heap
-**.  Only one set of instructions is executed at a time.
+Yes, **JavaScript is** a **single-threaded language**. This means that it has **only one call stack and one memory heap
+**. Only one set of instructions is executed at a time.
 
 Also, **Javascript is Synchronous and blocking** in nature. meaning that code is executed line by line and one task must
 be completed before the next one begins
 
-**However**, JavaScript also has asynchronous capabilities, which allow certain operations to be executed independently of
+**However**, JavaScript also has asynchronous capabilities, which allow certain operations to be executed independently
+of
 the main execution thread. This is commonly achieved through mechanisms like callbacks, promises, async/await, and event
 listeners. These asynchronous features enable JavaScript to handle tasks such as fetching data, handling user input, and
 performing I/O operations without blocking the main thread, making it suitable for building responsive and interactive
@@ -139,17 +140,17 @@ In JavaScript, callbacks are commonly used to handle asynchronous operations.
 executed after the completion of a specific task or at a given time.**
 
 ```javascript
-function fetchData(url, callback) {  
-  // Simulate fetching data from a server  
-  setTimeout(() => {  
-    const data = 'Some data from the server';  
-    callback(data);  
-  }, 1000);  
-}  
+function fetchData(url, callback) {
+    // Simulate fetching data from a server  
+    setTimeout(() => {
+        const data = 'Some data from the server';
+        callback(data);
+    }, 1000);
+}
 
-function processData(data) {  
-  console.log('Processing data:', data);  
-}  
+function processData(data) {
+    console.log('Processing data:', data);
+}
 
 fetchData('https://example.com/data', processData);
 ```
@@ -167,24 +168,24 @@ Callback Hell is an anti-pattern with multiple nested callbacks which makes code
 with asynchronous logic.
 
 ```javascript
-fs.readFile('file1.txt', 'utf8', function (err, data) {  
-  if (err) {  
-    console.error(err);  
-  } else {  
-    fs.readFile('file2.txt', 'utf8', function (err, data) {  
-      if (err) {  
-        console.error(err);  
-      } else {  
-        fs.readFile('file3.txt', 'utf8', function (err, data) {  
-          if (err) {  
-            console.error(err);  
-          } else {  
-            // Continue with more nested callbacks...  
-          }  
-        });  
-      }  
-    });  
-  }  
+fs.readFile('file1.txt', 'utf8', function (err, data) {
+    if (err) {
+        console.error(err);
+    } else {
+        fs.readFile('file2.txt', 'utf8', function (err, data) {
+            if (err) {
+                console.error(err);
+            } else {
+                fs.readFile('file3.txt', 'utf8', function (err, data) {
+                    if (err) {
+                        console.error(err);
+                    } else {
+                        // Continue with more nested callbacks...  
+                    }
+                });
+            }
+        });
+    }
 });
 ```
 
@@ -195,33 +196,33 @@ of callbacks.
 **To avoid Callback Hell, modern JavaScript provides alternatives like Promises and async/await.** Here’s the same code
 using Promises:
 
-  ```javascript
-  const readFile = (file) => {  
-  return new Promise((resolve, reject) => {  
-    fs.readFile(file, 'utf8', (err, data) => {  
-      if (err) {  
-        reject(err);  
-      } else {  
-        resolve(data);  
-      }  
-    });  
-  });  
+```javascript
+  const readFile = (file) => {
+    return new Promise((resolve, reject) => {
+        fs.readFile(file, 'utf8', (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    });
 };
 
-readFile('file1.txt')  
-  .then((data1) => {  
-    return readFile('file2.txt');  
-  })  
-  .then((data2) => {  
-    return readFile('file3.txt');  
-  })  
-  .then((data3) => {  
-    // Continue with more promise-based code...  
-  })  
-  .catch((err) => {  
-    console.error(err);  
-  });
-  ```
+readFile('file1.txt')
+    .then((data1) => {
+        return readFile('file2.txt');
+    })
+    .then((data2) => {
+        return readFile('file3.txt');
+    })
+    .then((data3) => {
+        // Continue with more promise-based code...  
+    })
+    .catch((err) => {
+        console.error(err);
+    });
+```
 
 ## **7\. What is Promise and Promise chaining?**
 
@@ -237,9 +238,9 @@ Promises have three states:
    cannot be provided.
 
 **Promise constructor** has two parameters **(resolve, reject)** **which are functions.** If the async task has been
-completed without errors then call the resolve function with message or fetched data to resolve the promise.
+completed without errors then call the **resolve function** with message or fetched data to resolve the promise.
 
-If an error occurred then call the reject function and pass the error to it.
+If an error occurred then call the **reject function** and pass the error to it.
 
 we can access the result of promise using .then() handler.
 
@@ -247,52 +248,52 @@ we can catch the error in the .catch() handler.
 
 ```javascript
 // Creating a Promise  
-const fetchData = new Promise((resolve, reject) => {  
-  // Simulate fetching data from a server  
-  setTimeout(() => {  
-    const data = 'Some data from the server';  
-    // Resolve the Promise with the retrieved data  
-    resolve(data);  
-    // Reject the Promise with an error  
-    // reject(new Error('Failed to fetch data'));  
-  }, 1000);  
-});  
+const fetchData = new Promise((resolve, reject) => {
+    // Simulate fetching data from a server  
+    setTimeout(() => {
+        const data = 'Some data from the server';
+        // Resolve the Promise with the retrieved data  
+        resolve(data);
+        // Reject the Promise with an error  
+        // reject(new Error('Failed to fetch data'));  
+    }, 1000);
+});
 
 // Consuming the Promise  
-fetchData  
-  .then((data) => {  
-    console.log('Data fetched:', data);  
-  })  
-  .catch((error) => {  
-    console.error('Error fetching data:', error);  
-  });
+fetchData
+    .then((data) => {
+        console.log('Data fetched:', data);
+    })
+    .catch((error) => {
+        console.error('Error fetching data:', error);
+    });
 ```
 
-**Promise chaining:** The process of **executing a sequence of asynchronous tasks one after another using promises** is
+**Promise Chaining:** The process of **executing a sequence of asynchronous tasks one after another using promises** is
 known as Promise chaining.
 
 **It involves chaining multiple** `**.then()**` **methods** to a Promise to perform a series of tasks in a specific
 order.
 
 ```javascript
-new Promise(function (resolve, reject) {  
-  setTimeout(() => resolve(1), 1000);  
-})  
-  .then(function (result) {  
-    console.log(result); // 1  
-    return result * 2;  
-  })  
-  .then(function (result) {  
-    console.log(result); // 2  
-    return result * 3;  
-  })  
-  .then(function (result) {  
-    console.log(result); // 6  
-    return result * 4;  
-  });
+new Promise(function (resolve, reject) {
+    setTimeout(() => resolve(1), 1000);
+})
+    .then(function (result) {
+        console.log(result); // 1  
+        return result * 2;
+    })
+    .then(function (result) {
+        console.log(result); // 2  
+        return result * 3;
+    })
+    .then(function (result) {
+        console.log(result); // 6  
+        return result * 4;
+    });
 ```
 
-## 8\. What is async/await ?
+## 8\. What is async/await?
 
 Async/await is a **modern approach** to handling asynchronous code in JavaScript. It provides a more concise and
 readable way to work with Promises and async operations, effectively avoiding the “Callback Hell” and improving the
@@ -303,36 +304,38 @@ In JavaScript, **the async keyword is used to define an asynchronous function, w
 Within an async function, **the await keyword is used to pause the execution of the function until a Promise is resolved
 **, effectively allowing for synchronous-looking code while working with asynchronous operations.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="3c89" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title.function">fetchData</span>() {  
-  <span class="hljs-keyword">try</span> {  
-    <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> <span class="hljs-title.function">fetch</span>(<span class="hljs-string">'https://example.com/data'</span>);  
-    <span class="hljs-keyword">const</span> jsonData = <span class="hljs-keyword">await</span> data.<span class="hljs-title.function">json</span>();  
-    <span class="hljs-keyword">return</span> jsonData;  
-  } <span class="hljs-keyword">catch</span> (error) {  
-    <span class="hljs-keyword">throw</span> error;  
+```javascript
+async function fetchData() {  
+  try {  
+    const data = await fetch('https://example.com/data');  
+    const jsonData = await data.json();  
+    return jsonData;  
+  } catch (error) {  
+    throw error;  
   }  
-}  
+}
 
-<span class="hljs-comment">// Using the async function</span>  
-<span class="hljs-title.function">fetchData</span>()  
-  .<span class="hljs-title.function">then</span>(<span class="hljs-function">(<span class="hljs-params">jsonData</span>) =></span> {  
-    <span class="hljs-comment">// Handle the retrieved data</span>  
+// Using the async function  
+fetchData()  
+  .then((jsonData) => {  
+    // Handle the retrieved data  
   })  
-  .<span class="hljs-title.function">catch</span>(<span class="hljs-function">(<span class="hljs-params">error</span>) =></span> {  
-    <span class="hljs-comment">// Handle errors</span>  
-  });</span></pre>
+  .catch((error) => {  
+    // Handle errors  
+  });
+```
 
 In this example, the fetchData function is defined as an async function, and it uses the await keyword to pause the
 execution and wait for the fetch and json operations, effectively working with Promises in a way that resembles
 synchronous code.
 
-## 9\. What is the difference between == and === operators ?
+## 9\. What is the difference between == and === operators?
 
-`**==**` **(Loose Equality Operator):** This operator **performs type coercion**, which means **it converts the operands
+`**==**` **(Loose Equality Operator):**  This operator **performs type coercion**, which means **it converts the operands
 to the same type** before making the comparison. It checks if the values are equal without considering their data types.
 For example, `1 == '1'` will return `true` because JavaScript converts the string `'1'` to a number before comparison.
 
-`**===**` **(Strict Equality Operator):** This operator performs a strict comparison **without type coercion**. It
+`**===**` **(Strict Equality Operator):**  This operator performs a strict comparison **without type coercion**. It
 checks if both the values and their data types are equal. For example, `1 === '1'` will return `false` because the data
 types are different (number and string).
 
@@ -343,157 +346,178 @@ values and their data types.
 
 Some of the example that covers the above cases:
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="3c0b" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-number">0</span> == <span class="hljs-literal">false</span>   <span class="hljs-comment">// true</span>  
-<span class="hljs-number">0</span> === <span class="hljs-literal">false</span>  <span class="hljs-comment">// false</span>  
-<span class="hljs-number">1</span> == <span class="hljs-string">"1"</span>     <span class="hljs-comment">// true</span>  
-<span class="hljs-number">1</span> === <span class="hljs-string">"1"</span>    <span class="hljs-comment">// false</span>  
-<span class="hljs-literal">null</span> == <span class="hljs-literal">undefined</span> <span class="hljs-comment">// true</span>  
-<span class="hljs-literal">null</span> === <span class="hljs-literal">undefined</span> <span class="hljs-comment">// false</span>  
-<span class="hljs-string">'0'</span> == <span class="hljs-literal">false</span> <span class="hljs-comment">// true</span>  
-<span class="hljs-string">'0'</span> === <span class="hljs-literal">false</span> <span class="hljs-comment">// false</span>  
-[]==[] or []===[] <span class="hljs-comment">//false, refer different objects in memory</span>  
-{}=={} or {}==={} <span class="hljs-comment">//false, refer different objects in memory</span></span></pre>
+```javascript
+0 == false   // true  
+0 === false  // false  
+1 == "1"     // true  
+1 === "1"    // false  
+null == undefined // true  
+null === undefined // false  
+'0' == false // true  
+'0' === false // false  
+[]==[] or []===[] //false, refer different objects in memory  
+{}=={} or {}==={} //false, refer different objects in memory
+```
 
-## **10\. Different ways to create an Object in Javascript ?**
+## **10\. Different ways to create an Object in Javascript?**
 
 In JavaScript, there are several ways to create objects. Some common methods for object creation include:
 
-**a)Object Literals**: The most straightforward way to create an object is by using object literals, which define an
+**a) Object Literals**:  The most straightforward way to create an object is by using object literals, which define an
 object’s properties and methods in a comma-separated list enclosed in curly braces.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="0717" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">let</span> person = {  
-       <span class="hljs-attr">firstName</span>: <span class="hljs-string">'John'</span>,  
-       <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Doe'</span>,  
-       <span class="hljs-attr">greet</span>: <span class="hljs-keyword">function</span>() {  
-           <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello, '</span> + <span class="hljs-variable.language">this</span>.<span class="hljs-property">firstName</span> + <span class="hljs-string">' '</span> + <span class="hljs-variable.language">this</span>.<span class="hljs-property">lastName</span>;  
+```javascript
+ let person = {  
+       firstName: 'John',  
+       lastName: 'Doe',  
+       greet: function() {  
+           return 'Hello, ' + this.firstName + ' ' + this.lastName;  
        }  
-   };</span></pre>
+   };
+```
 
-**b)Constructor Function**: Constructor functions can be used to create multiple instances of an object with the new
+**b) Constructor Function**:  Constructor functions can be used to create multiple instances of an object with the new
 keyword. Inside the constructor function, properties and methods can be assigned to the this keyword.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="9eb0" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">function</span> <span class="hljs-title.function">Person</span>(<span class="hljs-params">firstName, lastName</span>) {  
-       <span class="hljs-variable.language">this</span>.<span class="hljs-property">firstName</span> = firstName;  
-       <span class="hljs-variable.language">this</span>.<span class="hljs-property">lastName</span> = lastName;  
-       <span class="hljs-variable.language">this</span>.<span class="hljs-property">greet</span> = <span class="hljs-keyword">function</span>() {  
-           <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello, '</span> + <span class="hljs-variable.language">this</span>.<span class="hljs-property">firstName</span> + <span class="hljs-string">' '</span> + <span class="hljs-variable.language">this</span>.<span class="hljs-property">lastName</span>;  
+```javascript
+ function Person(firstName, lastName) {  
+       this.firstName = firstName;  
+       this.lastName = lastName;  
+       this.greet = function() {  
+           return 'Hello, ' + this.firstName + ' ' + this.lastName;  
        };  
    }  
 
-   <span class="hljs-keyword">let</span> person1 = <span class="hljs-keyword">new</span> <span class="hljs-title.class">Person</span>(<span class="hljs-string">'John'</span>, <span class="hljs-string">'Doe'</span>);  
-   <span class="hljs-keyword">let</span> person2 = <span class="hljs-keyword">new</span> <span class="hljs-title.class">Person</span>(<span class="hljs-string">'Jane'</span>, <span class="hljs-string">'Smith'</span>);</span></pre>
+   let person1 = new Person('John', 'Doe');  
+   let person2 = new Person('Jane', 'Smith');
+```
 
-**c)Object.create()**: The Object.create() method allows you to create a new object with a specified prototype object.
+**c) Object.create()**:  The Object.create() method allows you to create a new object with a specified prototype object.
 This method provides more control over the prototype of the newly created object.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="5b8c" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">let</span> personProto = {  
-       <span class="hljs-attr">greet</span>: <span class="hljs-keyword">function</span>() {  
-           <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello, '</span> + <span class="hljs-variable.language">this</span>.<span class="hljs-property">firstName</span> + <span class="hljs-string">' '</span> + <span class="hljs-variable.language">this</span>.<span class="hljs-property">lastName</span>;  
+```javascript
+ let personProto = {  
+       greet: function() {  
+           return 'Hello, ' + this.firstName + ' ' + this.lastName;  
        }  
    };  
 
-   <span class="hljs-keyword">let</span> person = <span class="hljs-title.class">Object</span>.<span class="hljs-title.function">create</span>(personProto);  
-   person.<span class="hljs-property">firstName</span> = <span class="hljs-string">'John'</span>;  
-   person.<span class="hljs-property">lastName</span> = <span class="hljs-string">'Doe'</span>;</span></pre>
+   let person = Object.create(personProto);  
+   person.firstName = 'John';  
+   person.lastName = 'Doe';
 
-**d)Class Syntax (ES6)**: With the introduction of ES6, JavaScript supports class syntax for defining objects using the
+```
+
+**d) Class Syntax (ES6)**:  With the introduction of ES6, JavaScript supports class syntax for defining objects using the
 class keyword. This provides a more familiar and structured way to create objects and define their properties and
 methods.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="045d" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">class</span> <span class="hljs-title.class">Person</span> {  
-       <span class="hljs-keyword">constructor</span>(firstName, lastName) {  
-           <span class="hljs-keyword">this</span>.firstName = firstName;  
-           <span class="hljs-keyword">this</span>.lastName = lastName;  
+```javascript
+ class Person {  
+       constructor(firstName, lastName) {  
+           this.firstName = firstName;  
+           this.lastName = lastName;  
        }  
        greet() {  
-           <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello, '</span> + <span class="hljs-keyword">this</span>.firstName + <span class="hljs-string">' '</span> + <span class="hljs-keyword">this</span>.lastName;  
+           return 'Hello, ' + this.firstName + ' ' + this.lastName;  
        }  
    }  
 
-   let person = new Person(<span class="hljs-string">'John'</span>, <span class="hljs-string">'Doe'</span>);</span></pre>
+   let person = new Person('John', 'Doe');
+```
 
-**e)Factory Functions**: Factory functions are functions that return an object. This approach allows you to encapsulate
+**e) Factory Functions**:  Factory functions are functions that return an object. This approach allows you to encapsulate
 the object creation process and easily create multiple instances with custom properties.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="f52a" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">function</span> <span class="hljs-title.function">createPerson</span>(<span class="hljs-params">firstName, lastName</span>) {  
-       <span class="hljs-keyword">return</span> {  
-           <span class="hljs-attr">firstName</span>: firstName,  
-           <span class="hljs-attr">lastName</span>: lastName,  
-           <span class="hljs-attr">greet</span>: <span class="hljs-keyword">function</span>() {  
-               <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello, '</span> + <span class="hljs-variable.language">this</span>.<span class="hljs-property">firstName</span> + <span class="hljs-string">' '</span> + <span class="hljs-variable.language">this</span>.<span class="hljs-property">lastName</span>;  
+```javascript
+ function createPerson(firstName, lastName) {  
+       return {  
+           firstName: firstName,  
+           lastName: lastName,  
+           greet: function() {  
+               return 'Hello, ' + this.firstName + ' ' + this.lastName;  
            }  
        };  
    }  
 
-   <span class="hljs-keyword">let</span> person1 = <span class="hljs-title.function">createPerson</span>(<span class="hljs-string">'John'</span>, <span class="hljs-string">'Doe'</span>);  
-   <span class="hljs-keyword">let</span> person2 = <span class="hljs-title.function">createPerson</span>(<span class="hljs-string">'Jane'</span>, <span class="hljs-string">'Smith'</span>);</span></pre>
+   let person1 = createPerson('John', 'Doe');  
+   let person2 = createPerson('Jane', 'Smith');
+```
 
-**f)Object.setPrototypeOf()**: The Object.setPrototypeOf() method can be used to set the prototype of a specified
+**f) Object.setPrototypeOf()**:  The Object.setPrototypeOf() method can be used to set the prototype of a specified
 object. This offers an alternative approach to setting the prototype of an object after its creation.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="aefc" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">let</span> personProto = {  
-       <span class="hljs-attr">greet</span>: <span class="hljs-keyword">function</span>() {  
-           <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello, '</span> + <span class="hljs-variable.language">this</span>.<span class="hljs-property">firstName</span> + <span class="hljs-string">' '</span> + <span class="hljs-variable.language">this</span>.<span class="hljs-property">lastName</span>;  
+```javascript
+ let personProto = {  
+       greet: function() {  
+           return 'Hello, ' + this.firstName + ' ' + this.lastName;  
        }  
    };  
 
-   <span class="hljs-keyword">let</span> person = {};  
-   person.<span class="hljs-property">firstName</span> = <span class="hljs-string">'John'</span>;  
-   person.<span class="hljs-property">lastName</span> = <span class="hljs-string">'Doe'</span>;  
-   <span class="hljs-title.class">Object</span>.<span class="hljs-title.function">setPrototypeOf</span>(person, personProto);</span></pre>
+   let person = {};  
+   person.firstName = 'John';  
+   person.lastName = 'Doe';  
+   Object.setPrototypeOf(person, personProto);
+```
 
-**g)Object.assign()**: The Object.assign() method can be used to create a new object by copying the values of all
+**g) Object.assign()**:  The Object.assign() method can be used to create a new object by copying the values of all
 enumerable own properties from one or more source objects to a target object. This is particularly useful for merging
 objects or creating a shallow copy.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="92fa" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-built_in">let</span> target = { a: 1, b: 2 };  
-   <span class="hljs-built_in">let</span> <span class="hljs-built_in">source</span> = { b: 3, c: 4 };  
-   <span class="hljs-built_in">let</span> mergedObject = Object.assign({}, target, <span class="hljs-built_in">source</span>);</span></pre>
+```javascript
+let target = { a: 1, b: 2 };
+let source = { b: 3, c: 4 };
+let mergedObject = Object.assign({}, target, source);
+```
 
-**h)Prototype Inheritance**: JavaScript uses prototypal inheritance, allowing objects to inherit properties and methods
+**h) Prototype Inheritance**:  JavaScript uses prototypal inheritance, allowing objects to inherit properties and methods
 from other objects. You can create objects by leveraging prototypal inheritance and using the prototype property of
 constructor functions or classes to define shared behavior.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="eb44" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">function</span> <span class="hljs-title.function">Animal</span>(<span class="hljs-params">name</span>) {  
-       <span class="hljs-variable.language">this</span>.<span class="hljs-property">name</span> = name;  
+```javascript
+ function Animal(name) {  
+       this.name = name;  
    }  
 
-   <span class="hljs-title.class">Animal</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">greet</span> = <span class="hljs-keyword">function</span>() {  
-       <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello, I am '</span> + <span class="hljs-variable.language">this</span>.<span class="hljs-property">name</span>;  
+   Animal.prototype.greet = function() {  
+       return 'Hello, I am ' + this.name;  
    };  
 
-   <span class="hljs-keyword">function</span> <span class="hljs-title.function">Dog</span>(<span class="hljs-params">name, breed</span>) {  
-       <span class="hljs-title.class">Animal</span>.<span class="hljs-title.function">call</span>(<span class="hljs-variable.language">this</span>, name);  
-       <span class="hljs-variable.language">this</span>.<span class="hljs-property">breed</span> = breed;  
+   function Dog(name, breed) {  
+       Animal.call(this, name);  
+       this.breed = breed;  
    }  
 
-   <span class="hljs-title.class">Dog</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span> = <span class="hljs-title.class">Object</span>.<span class="hljs-title.function">create</span>(<span class="hljs-title.class">Animal</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>);  
-   <span class="hljs-title.class">Dog</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">constructor</span> = <span class="hljs-title.class">Dog</span>;  
+   Dog.prototype = Object.create(Animal.prototype);  
+   Dog.prototype.constructor = Dog;  
 
-   <span class="hljs-keyword">let</span> myDog = <span class="hljs-keyword">new</span> <span class="hljs-title.class">Dog</span>(<span class="hljs-string">'Max'</span>, <span class="hljs-string">'Poodle'</span>);</span></pre>
+   let myDog = new Dog('Max', 'Poodle');
+```
 
-**i)Singleton Pattern**: The singleton pattern is used to restrict an object to a single instance. It can be implemented
-in JavaScript using a combination of closures and immediately invoked function expressions (IIFE). This ensures that
+**i) Singleton Pattern**:  The singleton pattern is used to restrict an object to a single instance. It can be implemented
+in JavaScript using a combination of **closures** and **[immediately invoked function expressions (IIFE)](https://en.wikipedia.org/wiki/Immediately_invoked_function_expression#:~:text=An%20immediately%20invoked%20function%20expression,lexical%20scope%20using%20function%20scoping.)**. This ensures that
 only one instance of the object is created.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="722e" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">let</span> singleton = (<span class="hljs-function">() =></span> {  
-       <span class="hljs-keyword">let</span> instance;  
+```javascript
+ let singleton = (() => {  
+       let instance;  
 
-       <span class="hljs-keyword">function</span> <span class="hljs-title.function">createInstance</span>() {  
-           <span class="hljs-keyword">return</span> {  
-               <span class="hljs-comment">// properties and methods</span>  
+       function createInstance() {  
+           return {  
+               // properties and methods  
            };  
        }  
 
-       <span class="hljs-keyword">return</span> {  
-           <span class="hljs-attr">getInstance</span>: <span class="hljs-function">() =></span> {  
-               <span class="hljs-keyword">if</span> (!instance) {  
-                   instance = <span class="hljs-title.function">createInstance</span>();  
+       return {  
+           getInstance: () => {  
+               if (!instance) {  
+                   instance = createInstance();  
                }  
-               <span class="hljs-keyword">return</span> instance;  
+               return instance;  
            }  
        };  
-   })();</span></pre>
+   })();
+```
 
 ## **11\. What is rest and spread operator?**
 
@@ -1146,6 +1170,7 @@ c) Another option is to use a library, such as Lodash, that provides a method fo
 <span class="hljs-keyword">const</span> obj2 = { <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: { <span class="hljs-attr">c</span>: <span class="hljs-number">2</span> } };  
 <span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(_.<span class="hljs-title.function">isEqual</span>(obj1, obj2)); <span class="hljs-comment">// Output: true</span></span></pre>
 
-Infomration gatther from this [Article](https://javascriptcentric.medium.com/top-30-javascript-interview-questions-and-answers-for-2024-7f1e2d1d0638)
+Infomration gatther from
+this [Article](https://javascriptcentric.medium.com/top-30-javascript-interview-questions-and-answers-for-2024-7f1e2d1d0638)
 
 </div>
