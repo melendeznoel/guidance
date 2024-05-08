@@ -588,17 +588,19 @@ We can say the closure is a **combination of a function and lexical environment 
 In other words, a closure gives a function access to its own scope, the scope of its outer function, and the global
 scope, allowing it to “remember” and continue to access variables and parameters from these scopes.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="c934" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">function</span> <span class="hljs-title.function">outerFunction</span>() {  
-  <span class="hljs-keyword">let</span> outerVariable = <span class="hljs-string">'I am from the outer function'</span>;  
+```javascript
+function outerFunction() {  
+  let outerVariable = 'I am from the outer function';  
 
-  <span class="hljs-keyword">return</span> <span class="hljs-title.function">innerFunction</span>() {  
-    <span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(outerVariable); <span class="hljs-comment">// Accessing outerVariable from the outer function's scope</span>  
+  return innerFunction() {  
+    console.log(outerVariable); // Accessing outerVariable from the outer function's scope  
   }  
 
 }  
 
-<span class="hljs-keyword">let</span> myFunction = <span class="hljs-title.function">outerFunction</span>();  
-<span class="hljs-title.function">myFunction</span>(); <span class="hljs-comment">// Output: I am from the outer function</span></span></pre>
+let myFunction = outerFunction();  
+myFunction(); // Output: I am from the outer function
+```
 
 **Closure is created every time when a function is created at the time of function creation and when you define a
 function inside another function.**
@@ -636,7 +638,7 @@ Closures have several important use cases in JavaScript:
    capture and maintain the state of variables within the context of an asynchronous operation, ensuring that the
    correct variables are accessible when the callback function is invoked.
 
-## 14\. Explain the concept of hoisting in JavaScript.
+## 14\. Explain the concept of hoisting in JavaScript
 
 Hoisting in JavaScript is the **default behavior** where variable and function **declarations are moved to the top of
 their containing scope** during the **compilation phase, before the actual code execution**. This means that you can use
@@ -645,22 +647,32 @@ a variable or call a function before it’s declared in your code.
 When you declare a variable using `var`, the declaration is hoisted to the top of its containing function or block and *
 *initialized with the default value of “undefined”.**
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="d389" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(x); <span class="hljs-comment">// Outputs: undefined</span>  
-<span class="hljs-keyword">var</span> x = <span class="hljs-number">5</span>;</span></pre>
+```javascript
+console.log(x); // Outputs: undefined
+
+var x = 5;
+```
 
 Variables declared with `let` and `const` are hoisted as well but have a "temporal dead zone" where they cannot be
 accessed before their declaration.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="a718" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(x); <span class="hljs-comment">// Throws an error (ReferenceError)</span>  
-<span class="hljs-keyword">let</span> x = <span class="hljs-number">5</span>;</span></pre>
+```javascript
+console.log(x); // Throws an error (ReferenceError)
+
+let x = 5;
+```
 
 Function declarations are also hoisted to the top of their containing scope. You can call a function before it’s
 declared in your code.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="ab46" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-built_in">sayHello</span>(); <span class="hljs-comment">// Outputs: "Hello, world!"</span>  
-function <span class="hljs-built_in">sayHello</span>() {  
-    console<span class="hljs-selector-class">.log</span>("Hello, world!");  
-}</span></pre>
+```javascript
+sayHello(); // Outputs: "Hello, world!"
+
+function sayHello() {  
+    console.log("Hello, world!");  
+}
+
+```
 
 **Hoisting is not happening with an arrow function, function expression, or variable initialization.**
 
