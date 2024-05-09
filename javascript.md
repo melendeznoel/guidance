@@ -882,7 +882,7 @@ There are three types of execution context in JavaScript:
 
 > **Eval Function Execution Context**
 
-**Execution Stack:** It is also known as the “**call stack**,” a LIFO (Last in, First out) data structure that stores
+**Execution Stack:** It is also known as the “**call stack**,” a **LIFO** (Last in, First out) data structure that stores
 all the execution context of the function calls that are in progress. When a function is called, a new execution context
 is created and pushed onto the stack. When the function completes, its context is popped off the stack.
 
