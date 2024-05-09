@@ -708,51 +708,61 @@ the `Object.prototype` at the top of the chain.
 **Call:** The call() method invokes a function with a specified `this` value and **individual arguments passed as
 comma-separated values**
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="8a6c" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">const</span> person1 = { <span class="hljs-attr">name</span>: <span class="hljs-string">'John'</span> };  
-   <span class="hljs-keyword">const</span> person2 = { <span class="hljs-attr">name</span>: <span class="hljs-string">'Jane'</span> };  
+```javascript
+ const person1 = { name: 'John' };  
+   const person2 = { name: 'Jane' };  
 
-   <span class="hljs-keyword">function</span> <span class="hljs-title.function">greet</span>(<span class="hljs-params">greeting</span>) {  
-       <span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(greeting + <span class="hljs-string">' '</span> + <span class="hljs-variable.language">this</span>.<span class="hljs-property">name</span>);  
+   function greet(greeting) {  
+       console.log(greeting + ' ' + this.name);  
    }  
 
-   greet.<span class="hljs-title.function">call</span>(person1, <span class="hljs-string">'Hello'</span>); <span class="hljs-comment">// Output: Hello John</span>  
-   greet.<span class="hljs-title.function">call</span>(person2, <span class="hljs-string">'Hi'</span>); <span class="hljs-comment">// Output: Hi Jane</span></span></pre>
+   greet.call(person1, 'Hello'); // Output: Hello John  
+   greet.call(person2, 'Hi'); // Output: Hi Jane
+```
 
 With call() method an object can use a method belonging to another object.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="5888" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">const</span> o1 = {  
-  <span class="hljs-attr">name</span>: <span class="hljs-string">'ravi'</span>,  
-  <span class="hljs-attr">getName</span>: <span class="hljs-keyword">function</span>(){  
-    <span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(<span class="hljs-string">`Hello, <span class="hljs-subst">${<span class="hljs-variable.language">this</span>.name}</span>`</span>)  
+```javascript
+const o1 = {  
+  name: 'ravi',  
+  getName: function(){  
+    console.log(`Hello, ${this.name}`)  
   }  
 }  
 
-<span class="hljs-keyword">const</span> o2 = {  
-  <span class="hljs-attr">name</span>: <span class="hljs-string">'JavaScript Centric'</span>  
-}  
+const o2 = {  
+  name: 'JavaScript Centric'  
+}
 
-o1.<span class="hljs-property">getName</span>.<span class="hljs-title.function">call</span>(o2) <span class="hljs-comment">// Hello, JavaScript Centric</span></span></pre>
+o1.getName.call(o2) // Hello, JavaScript Centric
+```
 
 **Apply:** Invokes the function with a given `this` value but **it accepts arguments as an array.** It is useful when
 the number of arguments to be passed is not known in advance or when the arguments are already in an array.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="e060" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">const</span> numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];  
+```javascript
+const numbers = [1, 2, 3, 4, 5];
 
-   <span class="hljs-keyword">const</span> max = <span class="hljs-title.class">Math</span>.<span class="hljs-property">max</span>.<span class="hljs-title.function">apply</span>(<span class="hljs-literal">null</span>, numbers);  
-   <span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(max); <span class="hljs-comment">// Output: 5</span></span></pre>
+const max = Math.max.apply(null, numbers);  
+
+console.log(max); // Output: 5
+```
 
 **bind:** instead of invoking it returns a new function and allows you to pass any number of arguments. bind() method
 takes an object as first argument and create a new function.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="27ad" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">const</span> <span class="hljs-variable.language">module</span> = {  
-       <span class="hljs-attr">x</span>: <span class="hljs-number">42</span>,  
-       <span class="hljs-attr">getX</span>: <span class="hljs-keyword">function</span>() {  
-           <span class="hljs-keyword">return</span> <span class="hljs-variable.language">this</span>.<span class="hljs-property">x</span>;  
+```javascript
+const module = {  
+       x: 42,  
+       getX: function() {  
+           return this.x;  
        }  
-   };  
+   };
 
-   <span class="hljs-keyword">const</span> boundGetX = unboundGetX.<span class="hljs-title.function">bind</span>(<span class="hljs-variable.language">module</span>);  
-   <span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(<span class="hljs-title.function">boundGetX</span>()); <span class="hljs-comment">// Output: 42</span></span></pre>
+const boundGetX = unboundGetX.bind(module);  
+
+console.log(boundGetX()); // Output: 42
+```
 
 ## **18\. What are lambda or arrow functions?**
 
@@ -764,15 +774,20 @@ There are two types of functions in JavaScript
 **Regular Function:** We can write the regular function in two ways, i.e. **Function declaration,** and **Function
 expression.**
 
-<figure class="pa pb pc pd pe lw lo lp paragraph-image">
+```javascript
+// Function declaration
+function add(a, b) {
+   return a + b;
+}
 
-<div role="button" tabindex="0" class="lx ly ee lz bg ma">
+// Function expression
+const sum = function (a, b) {
+   return a + b;
+}
 
-<div class="lo lp qk"><picture><source srcset="https://miro.medium.com/v2/resize:fit:640/format:webp/1*GCJLICpHMz9JT4yCDBVt9A.png 640w, https://miro.medium.com/v2/resize:fit:720/format:webp/1*GCJLICpHMz9JT4yCDBVt9A.png 720w, https://miro.medium.com/v2/resize:fit:750/format:webp/1*GCJLICpHMz9JT4yCDBVt9A.png 750w, https://miro.medium.com/v2/resize:fit:786/format:webp/1*GCJLICpHMz9JT4yCDBVt9A.png 786w, https://miro.medium.com/v2/resize:fit:828/format:webp/1*GCJLICpHMz9JT4yCDBVt9A.png 828w, https://miro.medium.com/v2/resize:fit:1100/format:webp/1*GCJLICpHMz9JT4yCDBVt9A.png 1100w, https://miro.medium.com/v2/resize:fit:1400/format:webp/1*GCJLICpHMz9JT4yCDBVt9A.png 1400w" sizes="(min-resolution: 4dppx) and (max-width: 700px) 50vw, (-webkit-min-device-pixel-ratio: 4) and (max-width: 700px) 50vw, (min-resolution: 3dppx) and (max-width: 700px) 67vw, (-webkit-min-device-pixel-ratio: 3) and (max-width: 700px) 65vw, (min-resolution: 2.5dppx) and (max-width: 700px) 80vw, (-webkit-min-device-pixel-ratio: 2.5) and (max-width: 700px) 80vw, (min-resolution: 2dppx) and (max-width: 700px) 100vw, (-webkit-min-device-pixel-ratio: 2) and (max-width: 700px) 100vw, 700px" type="image/webp"><source data-testid="og" srcset="https://miro.medium.com/v2/resize:fit:640/1*GCJLICpHMz9JT4yCDBVt9A.png 640w, https://miro.medium.com/v2/resize:fit:720/1*GCJLICpHMz9JT4yCDBVt9A.png 720w, https://miro.medium.com/v2/resize:fit:750/1*GCJLICpHMz9JT4yCDBVt9A.png 750w, https://miro.medium.com/v2/resize:fit:786/1*GCJLICpHMz9JT4yCDBVt9A.png 786w, https://miro.medium.com/v2/resize:fit:828/1*GCJLICpHMz9JT4yCDBVt9A.png 828w, https://miro.medium.com/v2/resize:fit:1100/1*GCJLICpHMz9JT4yCDBVt9A.png 1100w, https://miro.medium.com/v2/resize:fit:1400/1*GCJLICpHMz9JT4yCDBVt9A.png 1400w" sizes="(min-resolution: 4dppx) and (max-width: 700px) 50vw, (-webkit-min-device-pixel-ratio: 4) and (max-width: 700px) 50vw, (min-resolution: 3dppx) and (max-width: 700px) 67vw, (-webkit-min-device-pixel-ratio: 3) and (max-width: 700px) 65vw, (min-resolution: 2.5dppx) and (max-width: 700px) 80vw, (-webkit-min-device-pixel-ratio: 2.5) and (max-width: 700px) 80vw, (min-resolution: 2dppx) and (max-width: 700px) 100vw, (-webkit-min-device-pixel-ratio: 2) and (max-width: 700px) 100vw, 700px">![](https://miro.medium.com/v2/resize:fit:700/1*GCJLICpHMz9JT4yCDBVt9A.png)</picture></div>
-
-</div>
-
-</figure>
+add(2, 3); // 5
+sum(2, 3); // 5
+```
 
 **Arrow or Fat Arrow Function: Lambda functions, also known as arrow functions**, are a feature introduced in
 JavaScript (ES6) that is a more concise syntax for writing **function expressions.** They have a shorter syntax compared
@@ -781,15 +796,15 @@ functional programming concepts.
 
 There is no declaration approach here, we can write by using Function expressions only.
 
-<figure class="pa pb pc pd pe lw lo lp paragraph-image">
+```javascript
+// arrow function expression
+const add = (a, b) => {
+    return a + b;
+}
 
-<div role="button" tabindex="0" class="lx ly ee lz bg ma">
-
-<div class="lo lp ql"><picture><source srcset="https://miro.medium.com/v2/resize:fit:640/format:webp/1*E8Gnq2imQ_wWiSQvjtMYvw.png 640w, https://miro.medium.com/v2/resize:fit:720/format:webp/1*E8Gnq2imQ_wWiSQvjtMYvw.png 720w, https://miro.medium.com/v2/resize:fit:750/format:webp/1*E8Gnq2imQ_wWiSQvjtMYvw.png 750w, https://miro.medium.com/v2/resize:fit:786/format:webp/1*E8Gnq2imQ_wWiSQvjtMYvw.png 786w, https://miro.medium.com/v2/resize:fit:828/format:webp/1*E8Gnq2imQ_wWiSQvjtMYvw.png 828w, https://miro.medium.com/v2/resize:fit:1100/format:webp/1*E8Gnq2imQ_wWiSQvjtMYvw.png 1100w, https://miro.medium.com/v2/resize:fit:1400/format:webp/1*E8Gnq2imQ_wWiSQvjtMYvw.png 1400w" sizes="(min-resolution: 4dppx) and (max-width: 700px) 50vw, (-webkit-min-device-pixel-ratio: 4) and (max-width: 700px) 50vw, (min-resolution: 3dppx) and (max-width: 700px) 67vw, (-webkit-min-device-pixel-ratio: 3) and (max-width: 700px) 65vw, (min-resolution: 2.5dppx) and (max-width: 700px) 80vw, (-webkit-min-device-pixel-ratio: 2.5) and (max-width: 700px) 80vw, (min-resolution: 2dppx) and (max-width: 700px) 100vw, (-webkit-min-device-pixel-ratio: 2) and (max-width: 700px) 100vw, 700px" type="image/webp"><source data-testid="og" srcset="https://miro.medium.com/v2/resize:fit:640/1*E8Gnq2imQ_wWiSQvjtMYvw.png 640w, https://miro.medium.com/v2/resize:fit:720/1*E8Gnq2imQ_wWiSQvjtMYvw.png 720w, https://miro.medium.com/v2/resize:fit:750/1*E8Gnq2imQ_wWiSQvjtMYvw.png 750w, https://miro.medium.com/v2/resize:fit:786/1*E8Gnq2imQ_wWiSQvjtMYvw.png 786w, https://miro.medium.com/v2/resize:fit:828/1*E8Gnq2imQ_wWiSQvjtMYvw.png 828w, https://miro.medium.com/v2/resize:fit:1100/1*E8Gnq2imQ_wWiSQvjtMYvw.png 1100w, https://miro.medium.com/v2/resize:fit:1400/1*E8Gnq2imQ_wWiSQvjtMYvw.png 1400w" sizes="(min-resolution: 4dppx) and (max-width: 700px) 50vw, (-webkit-min-device-pixel-ratio: 4) and (max-width: 700px) 50vw, (min-resolution: 3dppx) and (max-width: 700px) 67vw, (-webkit-min-device-pixel-ratio: 3) and (max-width: 700px) 65vw, (min-resolution: 2.5dppx) and (max-width: 700px) 80vw, (-webkit-min-device-pixel-ratio: 2.5) and (max-width: 700px) 80vw, (min-resolution: 2dppx) and (max-width: 700px) 100vw, (-webkit-min-device-pixel-ratio: 2) and (max-width: 700px) 100vw, 700px">![](https://miro.medium.com/v2/resize:fit:700/1*E8Gnq2imQ_wWiSQvjtMYvw.png)</picture></div>
-
-</div>
-
-</figure>
+// very simple and concise syntax
+const add = (a, b) => a + b;
+```
 
 There are certain differences between Arrow and Regular function, i.e
 
@@ -798,7 +813,7 @@ There are certain differences between Arrow and Regular function, i.e
 3. No prototype object for the **Arrow function**
 4. Cannot be invoked with a new keyword **(Not a constructor function)**
 5. No own this **(call, apply & bind won’t work as expected)**
-6. It cannot be used as a Generator function
+6. It cannot be used as a **Generator function**
 7. Duplicate-named parameters are not allowed
 
 ## 19\. What is the currying function?
@@ -809,18 +824,23 @@ functions.
 
 In JavaScript, **you can implement currying using closures and returning functions.**
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="f3dc" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-comment">// Regular function taking two arguments</span>  
-<span class="hljs-keyword">function</span> <span class="hljs-title.function">add</span>(<span class="hljs-params">x, y</span>) {  
-    <span class="hljs-keyword">return</span> x + y;  
-}</span></pre>
+```javascript
+// Regular function taking two arguments
+function add(x, y) {
+    return x + y;
+}
 
-<pre class="qd pv pr qe qf ax qg bj"><span id="bbfa" class="nf ng fr pr b hl qh qi l qj qc" data-selectable-paragraph="">// Curried version of the function  
-function curryAdd(x) {  
-    return function(y) {  
-        return x + y;  
-    };  
-}</span><span id="472f" class="nf ng fr pr b hl qm qi l qj qc" data-selectable-paragraph="">const add5 = curryAdd(5); // Partial application, creates a new function  
-console.log(add5(3)); // Output: 8</span></pre>
+// Curried version of the function
+function curryAdd(x) {
+   return function(y) {
+      return x + y;
+   };
+}
+
+const add5 = curryAdd(5); // Partial application, creates a new function
+
+console.log(add5(3)); // Output: 8
+```
 
 Currying is beneficial in functional programming and can make code more modular and reusable. It’s particularly useful
 in scenarios where you want to create functions with a varying number of arguments or build pipelines of data
