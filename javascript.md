@@ -925,21 +925,23 @@ operations are handled:
 a straightforward and organized manner. **Instead of using constructor functions and the new keyword** to create new
 objects, a **factory function encapsulates the object creation process and returns a new object.**
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="3c93" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">function</span> <span class="hljs-title.function">createPerson</span>(<span class="hljs-params">name, age</span>) {  
-  <span class="hljs-keyword">return</span> {  
-    <span class="hljs-attr">name</span>: name,  
-    <span class="hljs-attr">age</span>: age,  
-    <span class="hljs-attr">greet</span>: <span class="hljs-keyword">function</span>() {  
-      <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello, my name is <span class="hljs-subst">${<span class="hljs-variable.language">this</span>.name}</span> and I am <span class="hljs-subst">${<span class="hljs-variable.language">this</span>.age}</span> years old.`</span>;  
+```javascript
+function createPerson(name, age) {  
+  return {  
+    name: name,  
+    age: age,  
+    greet: function() {  
+      return `Hello, my name is ${this.name} and I am ${this.age} years old.`;  
     }  
   };  
 }  
 
-<span class="hljs-keyword">const</span> person1 = <span class="hljs-title.function">createPerson</span>(<span class="hljs-string">'Alice'</span>, <span class="hljs-number">25</span>);  
-<span class="hljs-keyword">const</span> person2 = <span class="hljs-title.function">createPerson</span>(<span class="hljs-string">'Bob'</span>, <span class="hljs-number">30</span>);  
+const person1 = createPerson('Alice', 25);  
+const person2 = createPerson('Bob', 30);  
 
-<span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(person1.<span class="hljs-title.function">greet</span>()); <span class="hljs-comment">// Output: Hello, my name is Alice and I am 25 years old.</span>  
-<span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(person2.<span class="hljs-title.function">greet</span>()); <span class="hljs-comment">// Output: Hello, my name is Bob and I am 30 years old.</span></span></pre>
+console.log(person1.greet()); // Output: Hello, my name is Alice and I am 25 years old.  
+console.log(person2.greet()); // Output: Hello, my name is Bob and I am 30 years old.
+```
 
 **A Generator function** in JavaScript is a special type of function **that can be paused and resumed during its
 execution.**
@@ -952,17 +954,19 @@ function by calling the next() method.
 The function’s code can be paused within the body using the **yield keyword**, and it can later be resumed from the
 exact point where it was paused.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="d9ed" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">function</span>* <span class="hljs-title.function">numberGenerator</span>() {  
-  <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>;  
-  <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {  
-    <span class="hljs-keyword">yield</span> i++;  
+```javascript
+function* numberGenerator() {  
+  let i = 0;  
+  while (true) {  
+    yield i++;  
   }  
 }  
 
-<span class="hljs-keyword">const</span> gen = <span class="hljs-title.function">numberGenerator</span>();  
-<span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(gen.<span class="hljs-title.function">next</span>().<span class="hljs-property">value</span>); <span class="hljs-comment">// Output: 0</span>  
-<span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(gen.<span class="hljs-title.function">next</span>().<span class="hljs-property">value</span>); <span class="hljs-comment">// Output: 1</span>  
-<span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(gen.<span class="hljs-title.function">next</span>().<span class="hljs-property">value</span>); <span class="hljs-comment">// Output: 2</span></span></pre>
+const gen = numberGenerator();  
+console.log(gen.next().value); // Output: 0  
+console.log(gen.next().value); // Output: 1  
+console.log(gen.next().value); // Output: 2
+```
 
 This provides a powerful mechanism for creating iterators and handling asynchronous code.
 
