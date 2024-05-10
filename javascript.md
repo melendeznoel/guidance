@@ -970,48 +970,60 @@ console.log(gen.next().value); // Output: 2
 
 This provides a powerful mechanism for creating iterators and handling asynchronous code.
 
-## **24\. Different ways to clone (Shallow and deep copy of object) an object?**
+## **24\. Different ways to clone (Shallow and deep) an object?**
 
 **A shallow copy** is a copy of an object whose **references are the same** as the original object. This means that if
 you change the value of a property in the shallow copy, it will also change the value of the property in the original
 object.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="d0c2" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">const</span> user = {  
-    <span class="hljs-attr">name</span>: <span class="hljs-string">"Kingsley"</span>,  
-    <span class="hljs-attr">age</span>: <span class="hljs-number">28</span>,  
-    <span class="hljs-attr">job</span>: <span class="hljs-string">"Web Developer"</span>  
+```javascript
+const user = {  
+    name: "Kingsley",  
+    age: 28,  
+    job: "Web Developer"  
 }  
-<span class="hljs-keyword">const</span> clone = user</span></pre>
+
+const clone = user
+```
 
 **A deep copy** is a copy of an object whose **references are not the same** as the original object. This means that if
 you change the value of a property in the deep copy, it will not change the value of the property in the original
 object.
 
-there different ways to create deep copy of an object.
+There different ways to create deep copy of an object.
 
-a)**JSON.parse and JSON.stringify**: useful for nested object also.
+a) **JSON.parse and JSON.stringify**:  useful for nested object also
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="04cc" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">const</span> originalObject = { <span class="hljs-attr">name</span>: <span class="hljs-string">"Alice"</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> };  
-   <span class="hljs-keyword">const</span> deepCopy = <span class="hljs-title.class">JSON</span>.<span class="hljs-title.function">parse</span>(<span class="hljs-title.class">JSON</span>.<span class="hljs-title.function">stringify</span>(originalObject));</span></pre>
+```javascript
+const originalObject = { name: "Alice", age: 25 };
 
-b)**structuredClone:**
+const deepCopy = JSON.parse(JSON.stringify(originalObject));
+```
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="995f" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">const</span> myDeepCopy = <span class="hljs-title.function">structuredClone</span>(myOriginal);</span></pre>
+b) **structuredClone:**
 
-c)**Spread Operator(…):** any object with a nested object will not be deep copied.
+```javascript
+const myDeepCopy = structuredClone(myOriginal);
+```
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="223d" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">const</span> originalObject = { <span class="hljs-attr">name</span>: <span class="hljs-string">"Alice"</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> };  
-<span class="hljs-keyword">const</span> deepCopy =  {...originalObject};  
+c) **Spread Operator(…):**  any object with a nested object will not be deep copied.
 
-deepCopy.<span class="hljs-property">name</span> = <span class="hljs-string">"ravi"</span>  
-<span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(<span class="hljs-string">"originalObject"</span>, originalObject.<span class="hljs-property">name</span>) <span class="hljs-comment">// Alice</span></span></pre>
+```javascript
+const originalObject = { name: "Alice", age: 25 };  
+const deepCopy =  {...originalObject};  
 
-d)**Object.assign():** the `Object.assign()` method should be used to deep copy objects that have no nested objects.
+deepCopy.name = "ravi"  
+console.log("originalObject", originalObject.name) // Alice
+```
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="638c" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">const</span> originalObject = { <span class="hljs-attr">name</span>: <span class="hljs-string">"Alice"</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> };  
-<span class="hljs-keyword">const</span> shallowCopy = <span class="hljs-title.class">Object</span>.<span class="hljs-title.function">assign</span>({}, originalObject);</span></pre>
+d) **Object.assign():**  should be used to deep copy objects that have no nested objects.
 
-e)**Recursion**:
+```javascript
+const originalObject = { name: "Alice", age: 25 };  
+const shallowCopy = Object.assign({}, originalObject);
+```
+
+e) **Recursion**:
 
 <pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="1445" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">function</span> <span class="hljs-title.function">deepCopy</span>(<span class="hljs-params">obj</span>) {  
        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> obj !== <span class="hljs-string">'object'</span> || obj === <span class="hljs-literal">null</span>) {  
@@ -1027,6 +1039,27 @@ e)**Recursion**:
    }  
    <span class="hljs-keyword">const</span> originalObject = { <span class="hljs-attr">name</span>: <span class="hljs-string">"Alice"</span>, <span class="hljs-attr">nested</span>: { <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> } };  
    <span class="hljs-keyword">const</span> deepCopy = <span class="hljs-title.function">deepCopy</span>(originalObject);</span></pre>
+
+```javascript
+    function deepCopy(obj) {  
+       if (typeof obj !== 'object' || obj === null) {  
+           return obj;  
+       }
+       
+       const newObj = Array.isArray(obj) ? [] : {};
+       
+       for (let key in obj) {  
+           if (Object.hasOwnProperty.call(obj, key)) {  
+               newObj[key] = deepCopy(obj[key]);  
+           }  
+       }
+       
+       return newObj;  
+   }
+   
+   const originalObject = { name: "Alice", nested: { age: 25 } };  
+   const deepCopy = deepCopy(originalObject);
+```
 
 ## **25\. How to make an object immutable? (seal and freeze methods)?**
 
