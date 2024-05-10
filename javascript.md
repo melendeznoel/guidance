@@ -1025,21 +1025,6 @@ const shallowCopy = Object.assign({}, originalObject);
 
 e) **Recursion**:
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="1445" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">function</span> <span class="hljs-title.function">deepCopy</span>(<span class="hljs-params">obj</span>) {  
-       <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> obj !== <span class="hljs-string">'object'</span> || obj === <span class="hljs-literal">null</span>) {  
-           <span class="hljs-keyword">return</span> obj;  
-       }  
-       <span class="hljs-keyword">const</span> newObj = <span class="hljs-title.class">Array</span>.<span class="hljs-title.function">isArray</span>(obj) ? [] : {};  
-       <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> key <span class="hljs-keyword">in</span> obj) {  
-           <span class="hljs-keyword">if</span> (<span class="hljs-title.class">Object</span>.<span class="hljs-property">hasOwnProperty</span>.<span class="hljs-title.function">call</span>(obj, key)) {  
-               newObj[key] = <span class="hljs-title.function">deepCopy</span>(obj[key]);  
-           }  
-       }  
-       <span class="hljs-keyword">return</span> newObj;  
-   }  
-   <span class="hljs-keyword">const</span> originalObject = { <span class="hljs-attr">name</span>: <span class="hljs-string">"Alice"</span>, <span class="hljs-attr">nested</span>: { <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> } };  
-   <span class="hljs-keyword">const</span> deepCopy = <span class="hljs-title.function">deepCopy</span>(originalObject);</span></pre>
-
 ```javascript
     function deepCopy(obj) {  
        if (typeof obj !== 'object' || obj === null) {  
@@ -1068,21 +1053,29 @@ In JavaScript, you can make an object immutable using the Object.seal() and Obje
 **Object.freeze()**: (**Completely Immutable)** this method freezes an object, making it both sealed and marking all its
 properties as read-only. After freezing an object, its properties cannot be modified, added, or removed.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="d269" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">const</span> obj = { <span class="hljs-attr">name</span>: <span class="hljs-string">'Alice'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> };  
-     <span class="hljs-title.class">Object</span>.<span class="hljs-title.function">freeze</span>(obj);  
-     obj.<span class="hljs-property">name</span> = <span class="hljs-string">'Bob'</span>; <span class="hljs-comment">// Not allowed</span>  
-     obj.<span class="hljs-property">address</span> = <span class="hljs-string">'123 Street'</span>; <span class="hljs-comment">// Not allowed</span>  
-     <span class="hljs-keyword">delete</span> obj.<span class="hljs-property">age</span>; <span class="hljs-comment">// Not allowed</span></span></pre>
+```javascript
+const obj = { name: 'Alice', age: 25 };
+
+Object.freeze(obj);
+
+obj.name = 'Bob'; // Not allowed  
+obj.address = '123 Street'; // Not allowed  
+delete obj.age; // Not allowed
+```
 
 **Object.seal(): (Partialy Immutable)** this method seals an object, preventing new properties from being added and
 marking all existing properties as non-configurable. However, you can still modify the values of existing properties
 that are writable.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"> <span id="77de" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">const</span> obj = { <span class="hljs-attr">name</span>: <span class="hljs-string">'Alice'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> };  
-     <span class="hljs-title.class">Object</span>.<span class="hljs-title.function">seal</span>(obj);  
-     obj.<span class="hljs-property">name</span> = <span class="hljs-string">'Bob'</span>; <span class="hljs-comment">// Allowed</span>  
-     obj.<span class="hljs-property">address</span> = <span class="hljs-string">'123 Street'</span>; <span class="hljs-comment">// Not allowed (no new properties can be added)</span>  
-     <span class="hljs-keyword">delete</span> obj.<span class="hljs-property">age</span>; <span class="hljs-comment">// Not allowed (existing properties cannot be deleted)</span></span></pre>
+```javascript
+const obj = { name: 'Alice', age: 25 };
+
+Object.seal(obj);
+
+obj.name = 'Bob'; // Allowed  
+obj.address = '123 Street'; // Not allowed (no new properties can be added)  
+delete obj.age; // Not allowed (existing properties cannot be deleted)
+```
 
 ## **26\. What is Event and event flow, event bubbling and event capturing?**
 
@@ -1093,9 +1086,11 @@ When you click an element that is nested in various other elements, before your 
 or target element, **it must trigger the click event for each of its parent elements first**, starting at the top with
 the global window object.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="46c9" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><div <span class="hljs-built_in">id</span>=<span class="hljs-string">"parent"</span>>  
-  <button <span class="hljs-built_in">id</span>=<span class="hljs-string">"child"</span>>Click me!</button>  
-</div></span></pre>
+```html
+<div id="parent">
+  <button id="child">Click me!</button>
+</div>
+```
 
 Now, let’s explain event flow with this example:
 
