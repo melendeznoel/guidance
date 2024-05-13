@@ -91,15 +91,14 @@ looks into the job queue or task queue and **dequeues any callback ready to be e
 
 ## 4\. **Difference between var, let, and const?**
 
-<figure class="pa pb pc pd pe lw lo lp paragraph-image">
-
-<div role="button" tabindex="0" class="lx ly ee lz bg ma">
-
-<div class="lo lp ps"><picture><source srcset="https://miro.medium.com/v2/resize:fit:640/format:webp/1*oO6KBAFAqh8t_j6WUScocQ.png 640w, https://miro.medium.com/v2/resize:fit:720/format:webp/1*oO6KBAFAqh8t_j6WUScocQ.png 720w, https://miro.medium.com/v2/resize:fit:750/format:webp/1*oO6KBAFAqh8t_j6WUScocQ.png 750w, https://miro.medium.com/v2/resize:fit:786/format:webp/1*oO6KBAFAqh8t_j6WUScocQ.png 786w, https://miro.medium.com/v2/resize:fit:828/format:webp/1*oO6KBAFAqh8t_j6WUScocQ.png 828w, https://miro.medium.com/v2/resize:fit:1100/format:webp/1*oO6KBAFAqh8t_j6WUScocQ.png 1100w, https://miro.medium.com/v2/resize:fit:1400/format:webp/1*oO6KBAFAqh8t_j6WUScocQ.png 1400w" sizes="(min-resolution: 4dppx) and (max-width: 700px) 50vw, (-webkit-min-device-pixel-ratio: 4) and (max-width: 700px) 50vw, (min-resolution: 3dppx) and (max-width: 700px) 67vw, (-webkit-min-device-pixel-ratio: 3) and (max-width: 700px) 65vw, (min-resolution: 2.5dppx) and (max-width: 700px) 80vw, (-webkit-min-device-pixel-ratio: 2.5) and (max-width: 700px) 80vw, (min-resolution: 2dppx) and (max-width: 700px) 100vw, (-webkit-min-device-pixel-ratio: 2) and (max-width: 700px) 100vw, 700px" type="image/webp"><source data-testid="og" srcset="https://miro.medium.com/v2/resize:fit:640/1*oO6KBAFAqh8t_j6WUScocQ.png 640w, https://miro.medium.com/v2/resize:fit:720/1*oO6KBAFAqh8t_j6WUScocQ.png 720w, https://miro.medium.com/v2/resize:fit:750/1*oO6KBAFAqh8t_j6WUScocQ.png 750w, https://miro.medium.com/v2/resize:fit:786/1*oO6KBAFAqh8t_j6WUScocQ.png 786w, https://miro.medium.com/v2/resize:fit:828/1*oO6KBAFAqh8t_j6WUScocQ.png 828w, https://miro.medium.com/v2/resize:fit:1100/1*oO6KBAFAqh8t_j6WUScocQ.png 1100w, https://miro.medium.com/v2/resize:fit:1400/1*oO6KBAFAqh8t_j6WUScocQ.png 1400w" sizes="(min-resolution: 4dppx) and (max-width: 700px) 50vw, (-webkit-min-device-pixel-ratio: 4) and (max-width: 700px) 50vw, (min-resolution: 3dppx) and (max-width: 700px) 67vw, (-webkit-min-device-pixel-ratio: 3) and (max-width: 700px) 65vw, (min-resolution: 2.5dppx) and (max-width: 700px) 80vw, (-webkit-min-device-pixel-ratio: 2.5) and (max-width: 700px) 80vw, (min-resolution: 2dppx) and (max-width: 700px) 100vw, (-webkit-min-device-pixel-ratio: 2) and (max-width: 700px) 100vw, 700px">![](https://miro.medium.com/v2/resize:fit:700/1*oO6KBAFAqh8t_j6WUScocQ.png)</picture></div>
-
-</div>
-
-</figure>
+|                            | var                                                                                             | let                                                                                    | const                                                                                  |
+|----------------------------|-------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| origins                    | pre ES2015                                                                                      | ES2015(ES6)                                                                            | ES2015(ES6)                                                                            |
+| scope                      | globally scoped OR function scoped.  Attached to window object                                  | globally scoped OR block scoped                                                        | globally scoped OR block scoped                                                        |
+| global scope               | is attached to window object                                                                    | not attached to window object                                                          | attached to window object                                                              |
+| hoisting                   | is hoisted to the top of its execution (either global or function) and initialized as undefined | is hoisted to the top of its execution (either global or block) and left uninitialized | is hoisted to the top of its execution (either global or block) and left uninitialized |
+| redeclaration within scope | yes                                                                                             | no                                                                                     | no                                                                                     |
+| reassigned within scope    | yes                                                                                             | yes                                                                                    | no                                                                                     |
 
 In a browser the **window object is the window of the browser**, the top structure in the HTML tree. **Variables
 declared with var globally are attached to the window object**. Type _var dog = ‘bowser’_ in the browser’s console and
@@ -305,24 +304,24 @@ Within an async function, **the await keyword is used to pause the execution of 
 **, effectively allowing for synchronous-looking code while working with asynchronous operations.
 
 ```javascript
-async function fetchData() {  
-  try {  
-    const data = await fetch('https://example.com/data');  
-    const jsonData = await data.json();  
-    return jsonData;  
-  } catch (error) {  
-    throw error;  
-  }  
+async function fetchData() {
+    try {
+        const data = await fetch('https://example.com/data');
+        const jsonData = await data.json();
+        return jsonData;
+    } catch (error) {
+        throw error;
+    }
 }
 
 // Using the async function  
-fetchData()  
-  .then((jsonData) => {  
-    // Handle the retrieved data  
-  })  
-  .catch((error) => {  
-    // Handle errors  
-  });
+fetchData()
+    .then((jsonData) => {
+        // Handle the retrieved data  
+    })
+    .catch((error) => {
+        // Handle errors  
+    });
 ```
 
 In this example, the fetchData function is defined as an async function, and it uses the await keyword to pause the
@@ -331,7 +330,8 @@ synchronous code.
 
 ## 9\. What is the difference between == and === operators?
 
-`**==**` **(Loose Equality Operator):**  This operator **performs type coercion**, which means **it converts the operands
+`**==**` **(Loose Equality Operator):**  This operator **performs type coercion**, which means **it converts the
+operands
 to the same type** before making the comparison. It checks if the values are equal without considering their data types.
 For example, `1 == '1'` will return `true` because JavaScript converts the string `'1'` to a number before comparison.
 
@@ -355,8 +355,19 @@ null == undefined // true
 null === undefined // false  
 '0' == false // true  
 '0' === false // false  
-[]==[] or []===[] //false, refer different objects in memory  
-{}=={} or {}==={} //false, refer different objects in memory
+    [] == []
+or [] === [] //false, refer different objects in memory  
+{
+}
+==
+{
+}
+or
+{
+}
+===
+{
+} //false, refer different objects in memory
 ```
 
 ## **10\. Different ways to create an Object in Javascript?**
@@ -367,97 +378,100 @@ In JavaScript, there are several ways to create objects. Some common methods for
 object’s properties and methods in a comma-separated list enclosed in curly braces.
 
 ```javascript
- let person = {  
-       firstName: 'John',  
-       lastName: 'Doe',  
-       greet: function() {  
-           return 'Hello, ' + this.firstName + ' ' + this.lastName;  
-       }  
-   };
+ let person = {
+    firstName: 'John',
+    lastName: 'Doe',
+    greet: function () {
+        return 'Hello, ' + this.firstName + ' ' + this.lastName;
+    }
+};
 ```
 
 **b) Constructor Function**:  Constructor functions can be used to create multiple instances of an object with the new
 keyword. Inside the constructor function, properties and methods can be assigned to the this keyword.
 
 ```javascript
- function Person(firstName, lastName) {  
-       this.firstName = firstName;  
-       this.lastName = lastName;  
-       this.greet = function() {  
-           return 'Hello, ' + this.firstName + ' ' + this.lastName;  
-       };  
-   }  
+ function Person(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.greet = function () {
+        return 'Hello, ' + this.firstName + ' ' + this.lastName;
+    };
+}
 
-   let person1 = new Person('John', 'Doe');  
-   let person2 = new Person('Jane', 'Smith');
+let person1 = new Person('John', 'Doe');
+let person2 = new Person('Jane', 'Smith');
 ```
 
 **c) Object.create()**:  The Object.create() method allows you to create a new object with a specified prototype object.
 This method provides more control over the prototype of the newly created object.
 
 ```javascript
- let personProto = {  
-       greet: function() {  
-           return 'Hello, ' + this.firstName + ' ' + this.lastName;  
-       }  
-   };  
+ let personProto = {
+    greet: function () {
+        return 'Hello, ' + this.firstName + ' ' + this.lastName;
+    }
+};
 
-   let person = Object.create(personProto);  
-   person.firstName = 'John';  
-   person.lastName = 'Doe';
+let person = Object.create(personProto);
+person.firstName = 'John';
+person.lastName = 'Doe';
 
 ```
 
-**d) Class Syntax (ES6)**:  With the introduction of ES6, JavaScript supports class syntax for defining objects using the
+**d) Class Syntax (ES6)**:  With the introduction of ES6, JavaScript supports class syntax for defining objects using
+the
 class keyword. This provides a more familiar and structured way to create objects and define their properties and
 methods.
 
 ```javascript
- class Person {  
-       constructor(firstName, lastName) {  
-           this.firstName = firstName;  
-           this.lastName = lastName;  
-       }  
-       greet() {  
-           return 'Hello, ' + this.firstName + ' ' + this.lastName;  
-       }  
-   }  
+ class Person {
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
-   let person = new Person('John', 'Doe');
+    greet() {
+        return 'Hello, ' + this.firstName + ' ' + this.lastName;
+    }
+}
+
+let person = new Person('John', 'Doe');
 ```
 
-**e) Factory Functions**:  Factory functions are functions that return an object. This approach allows you to encapsulate
+**e) Factory Functions**:  Factory functions are functions that return an object. This approach allows you to
+encapsulate
 the object creation process and easily create multiple instances with custom properties.
 
 ```javascript
- function createPerson(firstName, lastName) {  
-       return {  
-           firstName: firstName,  
-           lastName: lastName,  
-           greet: function() {  
-               return 'Hello, ' + this.firstName + ' ' + this.lastName;  
-           }  
-       };  
-   }  
+ function createPerson(firstName, lastName) {
+    return {
+        firstName: firstName,
+        lastName: lastName,
+        greet: function () {
+            return 'Hello, ' + this.firstName + ' ' + this.lastName;
+        }
+    };
+}
 
-   let person1 = createPerson('John', 'Doe');  
-   let person2 = createPerson('Jane', 'Smith');
+let person1 = createPerson('John', 'Doe');
+let person2 = createPerson('Jane', 'Smith');
 ```
 
 **f) Object.setPrototypeOf()**:  The Object.setPrototypeOf() method can be used to set the prototype of a specified
 object. This offers an alternative approach to setting the prototype of an object after its creation.
 
 ```javascript
- let personProto = {  
-       greet: function() {  
-           return 'Hello, ' + this.firstName + ' ' + this.lastName;  
-       }  
-   };  
+ let personProto = {
+    greet: function () {
+        return 'Hello, ' + this.firstName + ' ' + this.lastName;
+    }
+};
 
-   let person = {};  
-   person.firstName = 'John';  
-   person.lastName = 'Doe';  
-   Object.setPrototypeOf(person, personProto);
+let person = {};
+person.firstName = 'John';
+person.lastName = 'Doe';
+Object.setPrototypeOf(person, personProto);
 ```
 
 **g) Object.assign()**:  The Object.assign() method can be used to create a new object by copying the values of all
@@ -465,58 +479,62 @@ enumerable own properties from one or more source objects to a target object. Th
 objects or creating a shallow copy.
 
 ```javascript
-let target = { a: 1, b: 2 };
-let source = { b: 3, c: 4 };
+let target = {a: 1, b: 2};
+let source = {b: 3, c: 4};
 let mergedObject = Object.assign({}, target, source);
 ```
 
-**h) Prototype Inheritance**:  JavaScript uses prototypal inheritance, allowing objects to inherit properties and methods
+**h) Prototype Inheritance**:  JavaScript uses prototypal inheritance, allowing objects to inherit properties and
+methods
 from other objects. You can create objects by leveraging prototypal inheritance and using the prototype property of
 constructor functions or classes to define shared behavior.
 
 ```javascript
- function Animal(name) {  
-       this.name = name;  
-   }  
+ function Animal(name) {
+    this.name = name;
+}
 
-   Animal.prototype.greet = function() {  
-       return 'Hello, I am ' + this.name;  
-   };  
+Animal.prototype.greet = function () {
+    return 'Hello, I am ' + this.name;
+};
 
-   function Dog(name, breed) {  
-       Animal.call(this, name);  
-       this.breed = breed;  
-   }  
+function Dog(name, breed) {
+    Animal.call(this, name);
+    this.breed = breed;
+}
 
-   Dog.prototype = Object.create(Animal.prototype);  
-   Dog.prototype.constructor = Dog;  
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
 
-   let myDog = new Dog('Max', 'Poodle');
+let myDog = new Dog('Max', 'Poodle');
 ```
 
-**i) Singleton Pattern**:  The singleton pattern is used to restrict an object to a single instance. It can be implemented
-in JavaScript using a combination of **closures** and **[immediately invoked function expressions (IIFE)](https://en.wikipedia.org/wiki/Immediately_invoked_function_expression#:~:text=An%20immediately%20invoked%20function%20expression,lexical%20scope%20using%20function%20scoping.)**. This ensures that
+**i) Singleton Pattern**:  The singleton pattern is used to restrict an object to a single instance. It can be
+implemented
+in JavaScript using a combination of **closures** and *
+*[immediately invoked function expressions (IIFE)](https://en.wikipedia.org/wiki/Immediately_invoked_function_expression#:~:text=An%20immediately%20invoked%20function%20expression,lexical%20scope%20using%20function%20scoping.)
+**. This ensures that
 only one instance of the object is created.
 
 ```javascript
- let singleton = (() => {  
-       let instance;  
+ let singleton = (() => {
+    let instance;
 
-       function createInstance() {  
-           return {  
-               // properties and methods  
-           };  
-       }  
+    function createInstance() {
+        return {
+            // properties and methods  
+        };
+    }
 
-       return {  
-           getInstance: () => {  
-               if (!instance) {  
-                   instance = createInstance();  
-               }  
-               return instance;  
-           }  
-       };  
-   })();
+    return {
+        getInstance: () => {
+            if (!instance) {
+                instance = createInstance();
+            }
+            return instance;
+        }
+    };
+})();
 ```
 
 ## **11\. What is rest and spread operator?**
@@ -526,8 +544,8 @@ arguments into an array**. It allows you to pass an arbitrary number of argument
 defining them as named parameters.**
 
 ```javascript
-function sum(...numbers) {  
-    return numbers.reduce((total, num) => total + num, 0);  
+function sum(...numbers) {
+    return numbers.reduce((total, num) => total + num, 0);
 }
 
 console.log(sum(1, 2, 3, 4)); // Outputs 10
@@ -537,14 +555,14 @@ console.log(sum(1, 2, 3, 4)); // Outputs 10
 another array or object**. It allows you to easily clone arrays, concatenate arrays, and merge objects.
 
 ```javascript
-const array1 = [1, 2, 3];  
-const array2 = [4, 5, 6];  
-const mergedArray = [...array1, ...array2];  
+const array1 = [1, 2, 3];
+const array2 = [4, 5, 6];
+const mergedArray = [...array1, ...array2];
 // mergedArray is [1, 2, 3, 4, 5, 6]
 
-const obj1 = { a: 1, b: 2 };
-const obj2 = { b: 3, c: 4 };
-const mergedObject = { ...obj1, ...obj2 };
+const obj1 = {a: 1, b: 2};
+const obj2 = {b: 3, c: 4};
+const mergedObject = {...obj1, ...obj2};
 // mergedObject is { a: 1, b: 3, c: 4 }
 ```
 
@@ -555,20 +573,20 @@ a function as its result.** In other words, it operates on functions, either by 
 them, or both.
 
 ```javascript
-function operationOnArray(arr, operation) {  
-  let result = [];  
-  for (let element of arr) {  
-    result.push(operation(element));  
-  }  
-  return result;  
-}  
+function operationOnArray(arr, operation) {
+    let result = [];
+    for (let element of arr) {
+        result.push(operation(element));
+    }
+    return result;
+}
 
-function double(x) {  
-  return x * 2;  
-}  
+function double(x) {
+    return x * 2;
+}
 
-let numbers = [1, 2, 3, 4];  
-let doubledNumbers = operationOnArray(numbers, double);  
+let numbers = [1, 2, 3, 4];
+let doubledNumbers = operationOnArray(numbers, double);
 console.log(doubledNumbers); // Output: [2, 4, 6, 8]
 ```
 
@@ -589,16 +607,17 @@ In other words, a closure gives a function access to its own scope, the scope of
 scope, allowing it to “remember” and continue to access variables and parameters from these scopes.
 
 ```javascript
-function outerFunction() {  
-  let outerVariable = 'I am from the outer function';  
+function outerFunction() {
+    let outerVariable = 'I am from the outer function';
 
-  return innerFunction() {  
-    console.log(outerVariable); // Accessing outerVariable from the outer function's scope  
-  }  
+    return innerFunction()
+    {
+        console.log(outerVariable); // Accessing outerVariable from the outer function's scope  
+    }
 
-}  
+}
 
-let myFunction = outerFunction();  
+let myFunction = outerFunction();
 myFunction(); // Output: I am from the outer function
 ```
 
@@ -668,8 +687,8 @@ declared in your code.
 ```javascript
 sayHello(); // Outputs: "Hello, world!"
 
-function sayHello() {  
-    console.log("Hello, world!");  
+function sayHello() {
+    console.log("Hello, world!");
 }
 
 ```
@@ -709,29 +728,29 @@ the `Object.prototype` at the top of the chain.
 comma-separated values**
 
 ```javascript
- const person1 = { name: 'John' };  
-   const person2 = { name: 'Jane' };  
+ const person1 = {name: 'John'};
+const person2 = {name: 'Jane'};
 
-   function greet(greeting) {  
-       console.log(greeting + ' ' + this.name);  
-   }  
+function greet(greeting) {
+    console.log(greeting + ' ' + this.name);
+}
 
-   greet.call(person1, 'Hello'); // Output: Hello John  
-   greet.call(person2, 'Hi'); // Output: Hi Jane
+greet.call(person1, 'Hello'); // Output: Hello John  
+greet.call(person2, 'Hi'); // Output: Hi Jane
 ```
 
 With call() method an object can use a method belonging to another object.
 
 ```javascript
-const o1 = {  
-  name: 'ravi',  
-  getName: function(){  
-    console.log(`Hello, ${this.name}`)  
-  }  
-}  
+const o1 = {
+    name: 'ravi',
+    getName: function () {
+        console.log(`Hello, ${this.name}`)
+    }
+}
 
-const o2 = {  
-  name: 'JavaScript Centric'  
+const o2 = {
+    name: 'JavaScript Centric'
 }
 
 o1.getName.call(o2) // Hello, JavaScript Centric
@@ -743,7 +762,7 @@ the number of arguments to be passed is not known in advance or when the argumen
 ```javascript
 const numbers = [1, 2, 3, 4, 5];
 
-const max = Math.max.apply(null, numbers);  
+const max = Math.max.apply(null, numbers);
 
 console.log(max); // Output: 5
 ```
@@ -752,14 +771,14 @@ console.log(max); // Output: 5
 takes an object as first argument and create a new function.
 
 ```javascript
-const module = {  
-       x: 42,  
-       getX: function() {  
-           return this.x;  
-       }  
-   };
+const module = {
+    x: 42,
+    getX: function () {
+        return this.x;
+    }
+};
 
-const boundGetX = unboundGetX.bind(module);  
+const boundGetX = unboundGetX.bind(module);
 
 console.log(boundGetX()); // Output: 42
 ```
@@ -777,12 +796,12 @@ expression.**
 ```javascript
 // Function declaration
 function add(a, b) {
-   return a + b;
+    return a + b;
 }
 
 // Function expression
 const sum = function (a, b) {
-   return a + b;
+    return a + b;
 }
 
 add(2, 3); // 5
@@ -832,9 +851,9 @@ function add(x, y) {
 
 // Curried version of the function
 function curryAdd(x) {
-   return function(y) {
-      return x + y;
-   };
+    return function (y) {
+        return x + y;
+    };
 }
 
 const add5 = curryAdd(5); // Partial application, creates a new function
@@ -882,7 +901,8 @@ There are three types of execution context in JavaScript:
 
 > **Eval Function Execution Context**
 
-**Execution Stack:** It is also known as the “**call stack**,” a **LIFO** (Last in, First out) data structure that stores
+**Execution Stack:** It is also known as the “**call stack**,” a **LIFO** (Last in, First out) data structure that
+stores
 all the execution context of the function calls that are in progress. When a function is called, a new execution context
 is created and pushed onto the stack. When the function completes, its context is popped off the stack.
 
@@ -926,18 +946,18 @@ a straightforward and organized manner. **Instead of using constructor functions
 objects, a **factory function encapsulates the object creation process and returns a new object.**
 
 ```javascript
-function createPerson(name, age) {  
-  return {  
-    name: name,  
-    age: age,  
-    greet: function() {  
-      return `Hello, my name is ${this.name} and I am ${this.age} years old.`;  
-    }  
-  };  
-}  
+function createPerson(name, age) {
+    return {
+        name: name,
+        age: age,
+        greet: function () {
+            return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+        }
+    };
+}
 
-const person1 = createPerson('Alice', 25);  
-const person2 = createPerson('Bob', 30);  
+const person1 = createPerson('Alice', 25);
+const person2 = createPerson('Bob', 30);
 
 console.log(person1.greet()); // Output: Hello, my name is Alice and I am 25 years old.  
 console.log(person2.greet()); // Output: Hello, my name is Bob and I am 30 years old.
@@ -955,14 +975,14 @@ The function’s code can be paused within the body using the **yield keyword**,
 exact point where it was paused.
 
 ```javascript
-function* numberGenerator() {  
-  let i = 0;  
-  while (true) {  
-    yield i++;  
-  }  
-}  
+function* numberGenerator() {
+    let i = 0;
+    while (true) {
+        yield i++;
+    }
+}
 
-const gen = numberGenerator();  
+const gen = numberGenerator();
 console.log(gen.next().value); // Output: 0  
 console.log(gen.next().value); // Output: 1  
 console.log(gen.next().value); // Output: 2
@@ -977,11 +997,11 @@ you change the value of a property in the shallow copy, it will also change the 
 object.
 
 ```javascript
-const user = {  
-    name: "Kingsley",  
-    age: 28,  
-    job: "Web Developer"  
-}  
+const user = {
+    name: "Kingsley",
+    age: 28,
+    job: "Web Developer"
+}
 
 const clone = user
 ```
@@ -995,7 +1015,7 @@ There different ways to create deep copy of an object.
 a) **JSON.parse and JSON.stringify**:  useful for nested object also
 
 ```javascript
-const originalObject = { name: "Alice", age: 25 };
+const originalObject = {name: "Alice", age: 25};
 
 const deepCopy = JSON.parse(JSON.stringify(originalObject));
 ```
@@ -1009,41 +1029,41 @@ const myDeepCopy = structuredClone(myOriginal);
 c) **Spread Operator(…):**  any object with a nested object will not be deep copied.
 
 ```javascript
-const originalObject = { name: "Alice", age: 25 };  
-const deepCopy =  {...originalObject};  
+const originalObject = {name: "Alice", age: 25};
+const deepCopy = {...originalObject};
 
-deepCopy.name = "ravi"  
+deepCopy.name = "ravi"
 console.log("originalObject", originalObject.name) // Alice
 ```
 
 d) **Object.assign():**  should be used to deep copy objects that have no nested objects.
 
 ```javascript
-const originalObject = { name: "Alice", age: 25 };  
+const originalObject = {name: "Alice", age: 25};
 const shallowCopy = Object.assign({}, originalObject);
 ```
 
 e) **Recursion**:
 
 ```javascript
-    function deepCopy(obj) {  
-       if (typeof obj !== 'object' || obj === null) {  
-           return obj;  
-       }
-       
-       const newObj = Array.isArray(obj) ? [] : {};
-       
-       for (let key in obj) {  
-           if (Object.hasOwnProperty.call(obj, key)) {  
-               newObj[key] = deepCopy(obj[key]);  
-           }  
-       }
-       
-       return newObj;  
-   }
-   
-   const originalObject = { name: "Alice", nested: { age: 25 } };  
-   const deepCopy = deepCopy(originalObject);
+    function deepCopy(obj) {
+    if (typeof obj !== 'object' || obj === null) {
+        return obj;
+    }
+
+    const newObj = Array.isArray(obj) ? [] : {};
+
+    for (let key in obj) {
+        if (Object.hasOwnProperty.call(obj, key)) {
+            newObj[key] = deepCopy(obj[key]);
+        }
+    }
+
+    return newObj;
+}
+
+const originalObject = {name: "Alice", nested: {age: 25}};
+const deepCopy = deepCopy(originalObject);
 ```
 
 ## **25\. How to make an object immutable? (seal and freeze methods)?**
@@ -1054,7 +1074,7 @@ In JavaScript, you can make an object immutable using the Object.seal() and Obje
 properties as read-only. After freezing an object, its properties cannot be modified, added, or removed.
 
 ```javascript
-const obj = { name: 'Alice', age: 25 };
+const obj = {name: 'Alice', age: 25};
 
 Object.freeze(obj);
 
@@ -1068,7 +1088,7 @@ marking all existing properties as non-configurable. However, you can still modi
 that are writable.
 
 ```javascript
-const obj = { name: 'Alice', age: 25 };
+const obj = {name: 'Alice', age: 25};
 
 Object.seal(obj);
 
@@ -1087,8 +1107,9 @@ or target element, **it must trigger the click event for each of its parent elem
 the global window object.
 
 ```html
+
 <div id="parent">
-  <button id="child">Click me!</button>
+    <button id="child">Click me!</button>
 </div>
 ```
 
@@ -1104,16 +1125,16 @@ Now, let’s explain event flow with this example:
 Here’s a simple JavaScript code snippet to see this in action:
 
 ```javascript
-document.getElementById('parent').addEventListener('click', function() {  
-  console.log('Div clicked (capturing phase)');  
+document.getElementById('parent').addEventListener('click', function () {
+    console.log('Div clicked (capturing phase)');
 }, true); // The 'true' here indicates capturing phase.
 
-document.getElementById('child').addEventListener('click', function() {
-   console.log('Button clicked (target phase)');
+document.getElementById('child').addEventListener('click', function () {
+    console.log('Button clicked (target phase)');
 });
 
-document.getElementById('parent').addEventListener('click', function() {
-   console.log('Div clicked (bubbling phase)');
+document.getElementById('parent').addEventListener('click', function () {
+    console.log('Div clicked (bubbling phase)');
 });
 ```
 
@@ -1141,12 +1162,12 @@ var form = document.querySelector("#registration-form");
 
 // Listen for changes to fields inside the form  
 form.addEventListener(
-        "input",
-        function (event) {
-           // Log the field that was changed  
-           console.log(event.target);
-        },
-        false
+    "input",
+    function (event) {
+        // Log the field that was changed  
+        console.log(event.target);
+    },
+    false
 );
 ```
 
@@ -1159,7 +1180,7 @@ SSE allows the server to push data to the web client (usually a browser) as soon
 it an excellent choice for scenarios where you need real-time updates without relying on complex protocols or
 third-party libraries.
 
-a) SSE provides a **unidirectional flow of data from the server to the client**.  The server initiates the communication,
+a) SSE provides a **unidirectional flow of data from the server to the client**. The server initiates the communication,
 sending updates to clients.
 
 b) SSE **uses a text-based protocol,** which means that data sent from the server to the client is typically in a text
@@ -1168,18 +1189,18 @@ format (usually JSON or plain text).
 c) SSE handles reconnection automatically.
 
 d) SSE establishes a persistent connection between the client and the server, allowing the server to send a stream of
-events to the client.  Each event can have a unique type and data associated with it.
+events to the client. Each event can have a unique type and data associated with it.
 
 e) **The EventSource object is used to receive server-sent event notifications.**  For example, you can receive messages
 from server as below,
 
 ```javascript
-if (typeof EventSource !== "undefined") {  
-  var source = new EventSource("sse_generator.js");
+if (typeof EventSource !== "undefined") {
+    var source = new EventSource("sse_generator.js");
 
-  source.onmessage = function (event) {  
-    document.getElementById("output").innerHTML += event.data + "";  
-  };  
+    source.onmessage = function (event) {
+        document.getElementById("output").innerHTML += event.data + "";
+    };
 }
 ```
 
@@ -1203,18 +1224,18 @@ Each serves a distinct purpose in web development:
 2. **Use Cases:**  Web Workers are commonly used for tasks that are computationally intensive or time-consuming, such as
    data processing, image manipulation, or complex calculations. By running these tasks in a separate thread, they don’t
    impact the responsiveness of the web page.
-3. **Communication:**  Web Workers can **communicate with the main thread using a messaging system**.  They can send and
+3. **Communication:**  Web Workers can **communicate with the main thread using a messaging system**. They can send and
    receive messages, allowing for coordination between the main thread and the worker.
 4. **Browser Support:**  Web Workers are supported in most modern browsers.
 
 ## Service Workers:
 
 1. **Offline Capabilities:**  Service Workers are a more advanced feature used for creating Progressive Web Apps (PWAs).
-    They act as proxy servers that run in the background and can intercept and cache network requests.  This enables
+   They act as proxy servers that run in the background and can intercept and cache network requests. This enables
    offline capabilities, such as serving cached content when the user is offline.
 2. **Use Cases:**  Service Workers are primarily used for implementing features like **offline access,** **push
    notifications, and background sync.**  They enable web apps to function even when there’s no internet connection.
-3. Lifecycle:  Service Workers have their own lifecycle with events like `install`, `activate`, and `fetch`.  They are
+3. Lifecycle:  Service Workers have their own lifecycle with events like `install`, `activate`, and `fetch`. They are
    typically registered at the beginning of a web app's life.
 4. Browser Support:  Service Workers are supported in modern browsers and are a key technology for creating reliable and
    engaging web applications.
@@ -1225,24 +1246,24 @@ a) One simple way to compare two JSON objects is to use JSON.stringify to conver
 strings.
 
 ```javascript
-function areEqual(obj1, obj2) {  
-  return JSON.stringify(obj1) === JSON.stringify(obj2);  
+function areEqual(obj1, obj2) {
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
 }
 
-const obj1 = { a: 1, b: { c: 2 } };
-const obj2 = { a: 1, b: { c: 2 } };
+const obj1 = {a: 1, b: {c: 2}};
+const obj2 = {a: 1, b: {c: 2}};
 
 console.log(areEqual(obj1, obj2)); // Output: true
 ```
 
-b) You can use the Ramda library to compare two JSON objects as well.  Ramda provides a function called equals for this
+b) You can use the Ramda library to compare two JSON objects as well. Ramda provides a function called equals for this
 purpose.
 
 ```javascript
 const R = require('ramda');
 
-const obj1 = { a: 1, b: { c: 2 } };
-const obj2 = { a: 1, b: { c: 2 } };
+const obj1 = {a: 1, b: {c: 2}};
+const obj2 = {a: 1, b: {c: 2}};
 
 console.log(R.equals(obj1, obj2)); // Output: true
 ```
@@ -1250,11 +1271,12 @@ console.log(R.equals(obj1, obj2)); // Output: true
 c) Another option is to use a library, such as Lodash, that provides a method for deep comparison of objects.
 
 ```javascript
-const _ = require('lodash');  
+const _ = require('lodash');
 
-const obj1 = { a: 1, b: { c: 2 } };  
-const obj2 = { a: 1, b: { c: 2 } };  
+const obj1 = {a: 1, b: {c: 2}};
+const obj2 = {a: 1, b: {c: 2}};
 console.log(_.isEqual(obj1, obj2)); // Output: true
 ```
 
-_The Information was gather from this [Article](https://javascriptcentric.medium.com/top-30-javascript-interview-questions-and-answers-for-2024-7f1e2d1d0638)_
+_The Information was gather from
+this [Article](https://javascriptcentric.medium.com/top-30-javascript-interview-questions-and-answers-for-2024-7f1e2d1d0638)_
