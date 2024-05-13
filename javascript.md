@@ -1103,15 +1103,19 @@ Now, let’s explain event flow with this example:
 
 Here’s a simple JavaScript code snippet to see this in action:
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="3925" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-variable.language">document</span>.<span class="hljs-title.function">getElementById</span>(<span class="hljs-string">'parent'</span>).<span class="hljs-title.function">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-keyword">function</span>() {  
-  <span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(<span class="hljs-string">'Div clicked (capturing phase)'</span>);  
-}, <span class="hljs-literal">true</span>); <span class="hljs-comment">// The 'true' here indicates capturing phase.</span></span></pre>
+```javascript
+document.getElementById('parent').addEventListener('click', function() {  
+  console.log('Div clicked (capturing phase)');  
+}, true); // The 'true' here indicates capturing phase.
 
-<pre class="qd pv pr qe qf ax qg bj"><span id="1927" class="nf ng fr pr b hl qh qi l qj qc" data-selectable-paragraph="">document.getElementById('child').addEventListener('click', function() {  
-  console.log('Button clicked (target phase)');  
-});</span><span id="33fb" class="nf ng fr pr b hl qm qi l qj qc" data-selectable-paragraph="">document.getElementById('parent').addEventListener('click', function() {  
-  console.log('Div clicked (bubbling phase)');  
-});</span></pre>
+document.getElementById('child').addEventListener('click', function() {
+   console.log('Button clicked (target phase)');
+});
+
+document.getElementById('parent').addEventListener('click', function() {
+   console.log('Div clicked (bubbling phase)');
+});
+```
 
 When you click the button, you’ll see these messages in the console in the following order:
 
@@ -1132,17 +1136,19 @@ is waiting.
 **Event delegation is a technique for listening to events where you delegate a parent element as the listener for all of
 the events** that happen inside it.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="1944" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">var</span> form = <span class="hljs-built_in">document</span>.<span class="hljs-built_in">querySelector</span>(<span class="hljs-string">"#registration-form"</span>);</span></pre>
+```javascript
+var form = document.querySelector("#registration-form");
 
-<pre class="qd pv pr qe qf ax qg bj"><span id="82c3" class="nf ng fr pr b hl qh qi l qj qc" data-selectable-paragraph="">// Listen for changes to fields inside the form  
-form.addEventListener(  
-  "input",  
-  function (event) {  
-    // Log the field that was changed  
-    console.log(event.target);  
-  },  
-  false  
-);</span></pre>
+// Listen for changes to fields inside the form  
+form.addEventListener(
+        "input",
+        function (event) {
+           // Log the field that was changed  
+           console.log(event.target);
+        },
+        false
+);
+```
 
 ## **28\. What are server-sent events?**
 
@@ -1153,28 +1159,31 @@ SSE allows the server to push data to the web client (usually a browser) as soon
 it an excellent choice for scenarios where you need real-time updates without relying on complex protocols or
 third-party libraries.
 
-a)SSE provides a **unidirectional flow of data from the server to the client**. The server initiates the communication,
+a) SSE provides a **unidirectional flow of data from the server to the client**.  The server initiates the communication,
 sending updates to clients.
 
-b)SSE **uses a text-based protocol,** which means that data sent from the server to the client is typically in a text
+b) SSE **uses a text-based protocol,** which means that data sent from the server to the client is typically in a text
 format (usually JSON or plain text).
 
-c)SSE handles reconnection automatically.
+c) SSE handles reconnection automatically.
 
-d)SSE establishes a persistent connection between the client and the server, allowing the server to send a stream of
-events to the client. Each event can have a unique type and data associated with it.
+d) SSE establishes a persistent connection between the client and the server, allowing the server to send a stream of
+events to the client.  Each event can have a unique type and data associated with it.
 
-e)**The EventSource object is used to receive server-sent event notifications.** For example, you can receive messages
+e) **The EventSource object is used to receive server-sent event notifications.**  For example, you can receive messages
 from server as below,
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="39ae" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-title.class">EventSource</span> !== <span class="hljs-string">"undefined"</span>) {  
-  <span class="hljs-keyword">var</span> source = <span class="hljs-keyword">new</span> <span class="hljs-title.class">EventSource</span>(<span class="hljs-string">"sse_generator.js"</span>);  
-  source.<span class="hljs-property">onmessage</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) {  
-    <span class="hljs-variable.language">document</span>.<span class="hljs-title.function">getElementById</span>(<span class="hljs-string">"output"</span>).<span class="hljs-property">innerHTML</span> += event.<span class="hljs-property">data</span> + <span class="hljs-string">"<br>"</span>;  
-  };  
-}</span></pre>
+```javascript
+if (typeof EventSource !== "undefined") {  
+  var source = new EventSource("sse_generator.js");
 
-f)Below are the list of events (onopen, onmessage,onerror) available for server-sent events.
+  source.onmessage = function (event) {  
+    document.getElementById("output").innerHTML += event.data + "";  
+  };  
+}
+```
+
+f) List of events (onopen, onmessage,onerror) available for server-sent events.
 
 ## **29\. What is a web worker or service worker in javascript?**
 
@@ -1188,26 +1197,26 @@ Each serves a distinct purpose in web development:
 
 ## Web Workers:
 
-1. **Concurrency:** **Web Workers are a browser feature** that allows you to run JavaScript code in the background, *
+1. **Concurrency:**  **Web Workers are a browser feature** that allows you to run JavaScript code in the background, *
    *separate from the main browser thread.** This enables concurrent execution of tasks without blocking the user
    interface.
-2. **Use Cases:** Web Workers are commonly used for tasks that are computationally intensive or time-consuming, such as
+2. **Use Cases:**  Web Workers are commonly used for tasks that are computationally intensive or time-consuming, such as
    data processing, image manipulation, or complex calculations. By running these tasks in a separate thread, they don’t
    impact the responsiveness of the web page.
-3. **Communication:** Web Workers can **communicate with the main thread using a messaging system**. They can send and
+3. **Communication:**  Web Workers can **communicate with the main thread using a messaging system**.  They can send and
    receive messages, allowing for coordination between the main thread and the worker.
-4. **Browser Support:** Web Workers are supported in most modern browsers.
+4. **Browser Support:**  Web Workers are supported in most modern browsers.
 
 ## Service Workers:
 
-1. **Offline Capabilities:** Service Workers are a more advanced feature used for creating Progressive Web Apps (PWAs).
-   They act as proxy servers that run in the background and can intercept and cache network requests. This enables
+1. **Offline Capabilities:**  Service Workers are a more advanced feature used for creating Progressive Web Apps (PWAs).
+    They act as proxy servers that run in the background and can intercept and cache network requests.  This enables
    offline capabilities, such as serving cached content when the user is offline.
-2. **Use Cases:** Service Workers are primarily used for implementing features like **offline access,** **push
-   notifications, and background sync.** They enable web apps to function even when there’s no internet connection.
-3. Lifecycle: Service Workers have their own lifecycle with events like `install`, `activate`, and `fetch`. They are
+2. **Use Cases:**  Service Workers are primarily used for implementing features like **offline access,** **push
+   notifications, and background sync.**  They enable web apps to function even when there’s no internet connection.
+3. Lifecycle:  Service Workers have their own lifecycle with events like `install`, `activate`, and `fetch`.  They are
    typically registered at the beginning of a web app's life.
-4. Browser Support: Service Workers are supported in modern browsers and are a key technology for creating reliable and
+4. Browser Support:  Service Workers are supported in modern browsers and are a key technology for creating reliable and
    engaging web applications.
 
 ## 30\. How to compare 2 JSON objects in javascript?
@@ -1215,33 +1224,37 @@ Each serves a distinct purpose in web development:
 a) One simple way to compare two JSON objects is to use JSON.stringify to convert them into strings and then compare the
 strings.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="1c72" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">function</span> <span class="hljs-title.function">areEqual</span>(<span class="hljs-params">obj1, obj2</span>) {  
-  <span class="hljs-keyword">return</span> <span class="hljs-title.class">JSON</span>.<span class="hljs-title.function">stringify</span>(obj1) === <span class="hljs-title.class">JSON</span>.<span class="hljs-title.function">stringify</span>(obj2);  
-}  
+```javascript
+function areEqual(obj1, obj2) {  
+  return JSON.stringify(obj1) === JSON.stringify(obj2);  
+}
 
-<span class="hljs-keyword">const</span> obj1 = { <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: { <span class="hljs-attr">c</span>: <span class="hljs-number">2</span> } };  
-<span class="hljs-keyword">const</span> obj2 = { <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: { <span class="hljs-attr">c</span>: <span class="hljs-number">2</span> } };  
-<span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(<span class="hljs-title.function">areEqual</span>(obj1, obj2)); <span class="hljs-comment">// Output: true</span></span></pre>
+const obj1 = { a: 1, b: { c: 2 } };
+const obj2 = { a: 1, b: { c: 2 } };
 
-b) You can use the Ramda library to compare two JSON objects as well. Ramda provides a function called equals for this
+console.log(areEqual(obj1, obj2)); // Output: true
+```
+
+b) You can use the Ramda library to compare two JSON objects as well.  Ramda provides a function called equals for this
 purpose.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="28c6" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">const</span> R = <span class="hljs-built_in">require</span>(<span class="hljs-string">'ramda'</span>);  
+```javascript
+const R = require('ramda');
 
-<span class="hljs-keyword">const</span> obj1 = { <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: { <span class="hljs-attr">c</span>: <span class="hljs-number">2</span> } };  
-<span class="hljs-keyword">const</span> obj2 = { <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: { <span class="hljs-attr">c</span>: <span class="hljs-number">2</span> } };  
+const obj1 = { a: 1, b: { c: 2 } };
+const obj2 = { a: 1, b: { c: 2 } };
 
-<span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(R.<span class="hljs-title.function">equals</span>(obj1, obj2)); <span class="hljs-comment">// Output: true</span></span></pre>
+console.log(R.equals(obj1, obj2)); // Output: true
+```
 
 c) Another option is to use a library, such as Lodash, that provides a method for deep comparison of objects.
 
-<pre class="pa pb pc pd pe pv pr pw bo px ba bj"><span id="e778" class="py ng fr pr b bf pz qa l qb qc" data-selectable-paragraph=""><span class="hljs-keyword">const</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'lodash'</span>);  
+```javascript
+const _ = require('lodash');  
 
-<span class="hljs-keyword">const</span> obj1 = { <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: { <span class="hljs-attr">c</span>: <span class="hljs-number">2</span> } };  
-<span class="hljs-keyword">const</span> obj2 = { <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: { <span class="hljs-attr">c</span>: <span class="hljs-number">2</span> } };  
-<span class="hljs-variable.language">console</span>.<span class="hljs-title.function">log</span>(_.<span class="hljs-title.function">isEqual</span>(obj1, obj2)); <span class="hljs-comment">// Output: true</span></span></pre>
+const obj1 = { a: 1, b: { c: 2 } };  
+const obj2 = { a: 1, b: { c: 2 } };  
+console.log(_.isEqual(obj1, obj2)); // Output: true
+```
 
-Infomration gatther from
-this [Article](https://javascriptcentric.medium.com/top-30-javascript-interview-questions-and-answers-for-2024-7f1e2d1d0638)
-
-</div>
+_The Information was gather from this [Article](https://javascriptcentric.medium.com/top-30-javascript-interview-questions-and-answers-for-2024-7f1e2d1d0638)_
